@@ -10,9 +10,9 @@
 ### Overview 
 In this	project students will develop a	web application	to manage a used car dealership network	that	only runs online.The dealership contains information of	cars,owners and clients. This application	should have three clearly distinct layers:
 
-        - A database to keep all the information (expect image files, which might be stored on the         server file system)
-        - A business layer that interacts with the database and provides a REST interface to the         outer world.
-        - A presentation layer developed in React
+     ** A database to keep all the information (expect image files, which might be stored on the          server file system)
+        A business layer that interacts with the database and provides a REST interface to the            outer world.
+        A presentation layer developed in React **
         
 ### Requirements
 
@@ -36,3 +36,13 @@ model order and	I want to look at their data in	detail.
 12. As  owner, I can associate and dissociate any car I own to another dealership, even if I don’t	own the dealership.
 
 #### Clients
+
+13. As a client I want to delete my account (thus erasing all traces of my existence from the	system).	
+14. As a client, I want	to search for all the cars.	
+15. As a client, I want	to search for all the cars in my district.	
+16. As a client, I want	to search for all the cars of a	given brand.	
+17. As a client, I want	to search for all the cars of a	given brand and	model.	
+18. As a client, I want	to search for all the cars within a price range.	
+19. As a client, I want	to search for all the cars within a given kilometer range.	
+20. As a client, I want	to search for all the cars of a	given fuel type.	
+21. As a client, I want	to combine all the previous queries.
