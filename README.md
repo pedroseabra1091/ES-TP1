@@ -10,9 +10,9 @@
 ### Overview 
 In this	project students will develop a	web application	to manage a used car dealership network	that	only runs online.The dealership contains information of	cars,owners and clients. This application	should have three clearly distinct layers:
 
-     **A database to keep all the information (expect image files, which might be stored on the          server file system)
-        A business layer that interacts with the database and provides a REST interface to the            outer world.
-        A presentation layer developed in React**
+**A database to keep all the information (expect image files, which might be stored on the server file system)
+A business layer that interacts with the database and provides a REST interface to the            outer world.
+A presentation layer developed in React**
         
 ### Requirements
 
