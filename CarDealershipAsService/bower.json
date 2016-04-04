@@ -1,0 +1,22 @@
+{
+  "name": "CarDealershipAsService",
+  "description": "",
+  "main": "gulpfile.js",
+  "authors": [
+    "pedroseabra1091 <pedroseabra1091@gmail.com>"
+  ],
+  "license": "BSD-2-Clause",
+  "homepage": "https://github.com/pedroseabra1091/ES-TP1",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "^0.14.8"
+  }
+}
