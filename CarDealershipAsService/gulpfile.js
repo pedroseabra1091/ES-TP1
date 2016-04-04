@@ -1,11 +1,35 @@
-var gulp = require('gulp'),
-    babelify = require('babelify'),
-    browserify = require('browserify'),
-    source = require('vinyl-source-stream');
+var gulp = require('gulp');
+var browserify = require('browserify');
+var babelify = require('babelify');
+var source = require('vinyl-source-stream');
+var rename = require('gulp-rename');
+var es = require('event-stream');
+var uglify = require('gulp-uglify');
+var buffer = require('vinyl-buffer');
 
-gulp.task('default', function () {
-    browserify({entries: 'static/js/index.js', extensions: ['.js'], debug: true})
-        .transform(babelify, { presets: ['es2015'] })
+gulp.task('transform', function () {
+	var files = [
+		'index.jsx'
+	];
+	var tasks = files.map(function(entry){
+		return browserify({entries: './static/jsx/' + entry})
+        .transform('babelify', {presets: ['es2015', 'react']})
         .bundle()
-        .pipe(gulp.dest('/static/js'));
+        .on('error', function(err){
+            console.log(err.stack);
+            this.emit('end');
+        })
+        .pipe(source(entry))
+        .pipe(buffer())
+        .pipe(uglify())
+        .pipe(rename({
+        	extname: '.js'
+        }))
+        .pipe(gulp.dest('./static/js'));
+	});
+	return es.merge.apply(null,tasks);
 });
+gulp.task('watch', ['transform'], function () {
+    gulp.watch('./static/jsx/*.jsx', ['transform']);
+});
+gulp.task('default', ['watch']);
