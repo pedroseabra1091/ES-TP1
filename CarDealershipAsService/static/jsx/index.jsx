@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Header from './header.jsx';
-import Body from './body.jsx';
+import Header from './Header.jsx';
+import Body from './Body.jsx';
 
-class Mainclass extends React.Component {
-  render(){
+
+var MainClass = React.createClass ({ 
+  render: function(){
     return(
       <div>
         <Header/>
@@ -13,7 +14,7 @@ class Mainclass extends React.Component {
       </div>
     );
   }
-}
+});
 
 const app = document.getElementById('app');
-ReactDOM.render(<Mainclass/>,app);
+ReactDOM.render(<MainClass/>,app);
