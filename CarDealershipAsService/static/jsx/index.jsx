@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, hashHistory } from 'react-router'
 
 import Header from './Header.jsx';
 import Register from './Register.jsx';
@@ -20,4 +20,11 @@ var MainClass = React.createClass ({
 });
 
 const app = document.getElementById('app');
-ReactDOM.render(<MainClass/>,app);
+ReactDOM.render(
+	<Router>
+		<Route path="/" component={Header}>
+			<Route path = "login" component={Login}/>
+			<Route path = "register" component={Register}/>
+		</Route>
+	</Router>
+,app);
