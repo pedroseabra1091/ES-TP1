@@ -1,16 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import Header from './Header.jsx';
-import Body from './Body.jsx';
-
+import Register from './Register.jsx';
+import Footer from './Footer.jsx';
+import Login from './Login.jsx';
 
 var MainClass = React.createClass ({ 
   render: function(){
     return(
       <div>
         <Header/>
-        <Body/>
+        <Login/>
+       	<Footer/>
       </div>
     );
   }

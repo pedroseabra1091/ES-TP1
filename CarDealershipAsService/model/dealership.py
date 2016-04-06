@@ -1,9 +1,8 @@
+from db import Base
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql.schema import ForeignKey
 from sqlalchemy.orm import relationship
-
-Base = declarative_base()
+from .car import Car
 
 class Dealership(Base):
 

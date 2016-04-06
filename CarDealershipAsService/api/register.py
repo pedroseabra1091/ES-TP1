@@ -1,18 +1,17 @@
 from flask import Flask,request,Blueprint,jsonify
+from db import engine
+from sqlalchemy.orm import sessionmaker
+from model import Client
 
 register = Blueprint('register',__name__)
 @register.route('/api/v1/register',methods = ['POST'])
-def isRunning():
-	process_name = request.json["name"]
-	process_email = request.json["email"]
-	process_password = request.json["password"]
-	process_contact = request.json["contact"]
+def create_user():
 
-	print (process_name)
-	print (process_email)
-	print (process_password)
-	print (process_contact)
+	Session = sessionmaker(bind=engine)
+	session = Session()
 
-	return jsonify({
-		'cawdaweawe': 123
-	})
+	new_client = Client(name= request.json["name"],email=request.json["email"],password=request.json["password"],contact=request.json["contact"])
+	session.add(new_client)
+	session.commit()
+
+	return "Record inserted successfully"

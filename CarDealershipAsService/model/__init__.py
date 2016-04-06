@@ -1,3 +1,5 @@
-from .model import car
-from .model import dealership
-from .model import user
+from .user import Client,Owner
+from .car import Car
+from .dealership import Dealership
+
+

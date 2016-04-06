@@ -1,3 +1,58 @@
+@font-face { font-family: MoonLight; src: url('Moon Light.otf'); } 
+@font-face { font-family: MoonLight; font-weight: bold; src: url('Moon Bold.otf');}
+
 html,body{
 	background-color:#e5e5e5;
+	height:100%;
+}
+label,button{
+	font-family: MoonLight;
+	color:white;
+}
+.label{
+    color:white;
+    margin-top: 14px;
+    font-weight: normal;
+}
+
+.centerize{
+	display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+.paddtop{
+	padding-top: 28px;
+}
+.leftrize{
+	display: block;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.nameApp{
+	background-color:#7ca7ce;
+	padding-top: 33px;
+	padding-left: 36px;
+    padding-bottom: 39px;
+}
+.inlinelocked{
+	display: inline-block;
+}
+.title{
+	color:white;
+	font-family: MoonLight;
+	position: relative;
+    bottom: 45px;
+    padding: 30px;
+}
+.container{
+	padding-top: 30px;
+}
+.login{
+	width: 500px;
+    display: block;
+    margin: 0 auto;
+    background-color: #9f9f9f;
+    border-radius: 4px;
+    padding: 57px;
 }

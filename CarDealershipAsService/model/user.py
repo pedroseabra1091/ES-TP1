@@ -1,8 +1,7 @@
+from db import Base
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-
-Base = declarative_base()
+from .dealership import Dealership
 
 class Client(Base):
 
@@ -13,7 +12,7 @@ class Client(Base):
     email =Column(String(100), unique=True)
     password = Column(String(100), nullable=False)
     contact = Column(Integer)
-
+   
 class Owner(Base):
 
     __tablename__ = 'owner'

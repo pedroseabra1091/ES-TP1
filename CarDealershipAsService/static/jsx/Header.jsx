@@ -3,7 +3,12 @@ import React from 'react';
 var Header = React.createClass ({
   render: function(){
     return(
-    	<h1 className="title">Car dealership as a service</h1>
+    	<div className = "leftrize">
+	    	<div className="inlinelocked">
+	    		<img src ="../static/assets/car_dealer.png" />
+	    	</div>
+	    	<h1 className="title inlinelocked">Car dealership as a service</h1>
+	    </div>
     );
   }
 });

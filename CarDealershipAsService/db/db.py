@@ -1,6 +1,11 @@
 from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+
 databaseurl = 'mysql://root:ameiro13@localhost/autotrader'
 
 engine = create_engine(databaseurl)
-Base.metadata.drop_all(engine)
-Base.metadata.create_all(engine)
+
+Base = declarative_base()
+
+def init_db():
+	Base.metadata.create_all(engine)

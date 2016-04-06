@@ -22,6 +22,8 @@
   },
   "dependencies": {
     "react-dom": "~0.14.8",
-    "react": "~0.14.8"
+    "react": "~0.14.8",
+    "react-router": "~2.0.1",
+    "history": "~2.0.1"
   }
 }
