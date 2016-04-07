@@ -6,27 +6,27 @@ from model import Client
 login = Blueprint('login',__name__)
 
 @login.route('/api/v1/login',methods = ['GET','POST']) 
-def whatever():
+def user_login():
 	if request.method == 'POST':
 
 		Session = sessionmaker(bind=engine)
 		session = Session()
 
-		someEmail = request.json["email"]
-		somePassword = request.json["password"]
+		requested_email = request.json["email"]
+		requested_password = request.json["password"]
 
-		realUser = session.query(Client).filter_by(email = someEmail).first()
+		User = session.query(Client).filter_by(email = requested_email).first()
 		
-		if realUser == None:
+		if User == None:
 			return jsonify({
 				'loginState': 'unsuccessful',
-				'erro': 'email nao encontrado'
+				'erro': 'email not found'
 			})
 
-		if realUser.password != somePassword:#fazer query a db
+		if User.password != requested_password:
 			return jsonify({
 				'loginState': 'unsuccessful',
-				'erro': 'password invalida'
+				'erro': 'invalid password'
 			})
 			
 		return jsonify({

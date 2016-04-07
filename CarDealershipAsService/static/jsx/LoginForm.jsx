@@ -41,9 +41,9 @@ var LoginForm = React.createClass({
 			contentType: 'application/json',
 			type: 'POST',
 			data: JSON.stringify(data),
-			success: function(cenas){
-				console.log(cenas);
-				this.setState({errorState:cenas.erro, loginState:cenas.loginState});
+			success: function(result){
+				console.log(result);
+				this.setState({errorState:result.erro, loginState:result.loginState});
 			}.bind(this)
 		});
 		this.setState({email : '', password : ''});
