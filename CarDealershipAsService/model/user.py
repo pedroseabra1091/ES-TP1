@@ -2,6 +2,7 @@ from db import Base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from .dealership import Dealership
+from .dealership import Car
 
 class Client(Base):
 

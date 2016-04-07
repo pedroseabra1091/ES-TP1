@@ -1,6 +1,7 @@
 from flask import Flask,request,Blueprint,jsonify
 from db import engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.exc import IntegrityError
 from model import Client
 
 register = Blueprint('register',__name__)
@@ -11,5 +12,10 @@ def create_user():
 	session = Session()
 
 	new_client = Client(name= request.json["name"],email=request.json["email"],password=request.json["password"],contact=request.json["contact"])
-	session.add(new_client)
-	session.commit()
+	try:	
+		session.add(new_client)
+		session.commit()
+	except IntegrityError:
+		return jsonify(result='IntegrityError failure')
+
+	return jsonify(result='success')

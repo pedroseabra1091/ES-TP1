@@ -56,3 +56,6 @@ label,button{
     border-radius: 4px;
     padding: 57px;
 }
+.button{
+	margin:10px;
+}
