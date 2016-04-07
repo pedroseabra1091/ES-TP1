@@ -66,16 +66,16 @@ var LoginForm = React.createClass({
 			<div className = "container">
 				<div className = "column login">
 					<form onSubmit={this.handleSubmit}>
-						<p className="control">
-						  <label className="radio">
-						    <input type="radio" name="useType" onChange={this.handleChange.bind(null,'client')} />
-						    Client
-						  </label>
-						  <label className="radio">
-						    <input type="radio" name ="useType" onChange={this.handleChange.bind(null,'owner')} />
-						    Owner
-						  </label>
-						</p>
+					  	<div className="centerize">
+							  <label className="radio">
+							    <input type="radio" name="useType" onChange={this.handleChange.bind(null,'client')} />
+							    Client
+							  </label>
+							  <label className="radio">
+							    <input type="radio" name ="useType" onChange={this.handleChange.bind(null,'owner')} />
+							    Owner
+							  </label>
+						</div>
 						<label className="label">Email</label>
 						<input className="input is-medium" type="text" value={this.state.email} onChange={this.handleChange.bind(null,'email')}/>
 						<label className="label">Password</label>

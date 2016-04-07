@@ -79,17 +79,17 @@ var FormComponent = React.createClass({
     	<div className="container">
   				<div className = "column login">
       				<form onSubmit = {this.handleSubmit} >
-                <p className="control">
-                    <label className="radio">
-                        <input type="radio" name="useType" onChange={this.handleChange.bind(null,'client')} />
-                      Client
-                    </label>
-                    <label className="radio">
-                        <input type="radio" name ="useType" onChange={this.handleChange.bind(null,'owner')} />
-                      Owner
-                    </label>
-                </p>
-      					<label className="label">Name</label>
+                <div className="centerize">
+                      <label className="radio">
+                          <input type="radio" name="useType" onChange={this.handleChange.bind(null,'client')} />
+                        <span>Client</span>
+                      </label>
+                      <label className="radio">
+                          <input type="radio" name ="useType" onChange={this.handleChange.bind(null,'owner')} />
+                        <span>Owner</span>
+                      </label>
+                </div>
+        				<label className="label">Name</label>
   					  	<input className="input is-medium" type="text" value = {this.state.name}  onChange = {this.handleChange.bind(null,'name')}/>
     						<label className="label">Email</label>
     						<input className="input is-medium" type="text" value = {this.state.email}  onChange = {this.handleChange.bind(null,'email')}/>
