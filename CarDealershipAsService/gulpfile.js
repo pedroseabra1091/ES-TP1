@@ -29,7 +29,6 @@ gulp.task('transform', function () {
     }))
     .pipe(gulp.dest('./static/js'));
 });
-
 gulp.task('watch', ['transform'], function () {
     gulp.watch('./static/jsx/index.jsx', ['transform']);
 });

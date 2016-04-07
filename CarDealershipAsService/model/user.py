@@ -2,11 +2,8 @@ from db import Base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from .dealership import Dealership
-<<<<<<< HEAD
-from .dealership import Car
-=======
 from .car import Car
->>>>>>> Login
+
 
 class Client(Base):
 

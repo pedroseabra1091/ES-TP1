@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router';
 
 var LoginForm = React.createClass({
 	getInitialState : function(){
@@ -9,7 +10,6 @@ var LoginForm = React.createClass({
 			loginState : ''
 		});
 	},
-
 	
 	handleChange : function(type, e){
 		if(type == 'email'){
@@ -52,22 +52,25 @@ var LoginForm = React.createClass({
 	render: function(){
 
 		return (
-			<div>
-				<form className="loginForm" onSubmit={this.handleSubmit}>
+			<div className = "container">
+				<div className = "column login">
+					<form onSubmit={this.handleSubmit}>
+						<label className="label">Email</label>
+						<input className="input is-medium" type="text" value={this.state.email} onChange={this.handleChange.bind(null,'email')}/>
+						<label className="label">Password</label>
+						<input className="input is-medium" type="password" value={this.state.password} onChange={this.handleChange.bind(null,'password')}/>
+						<div className="centerize paddtop">
+						  <button type="submit" className="button is-info is-large buttonmargin">Login</button>
+							  <Link to="/register"><button type="submit" className="button is-success is-large">Register</button></Link>
+		     			</div>  
+					</form>
 					<div>
-						<input type="text"  placeholder="your email here" value={this.state.email} onChange={this.handleChange.bind(null,'email')}/>
-						<input type="password"  placeholder="password" value={this.state.password} onChange={this.handleChange.bind(null,'password')}/>
+						<p>{this.state.loginState}<br/>{this.state.errorState}</p>
 					</div>
-					<input type="submit" value="Login" />
-				</form>
-				<div>
-					<p>{this.state.loginState}<br/>{this.state.errorState}</p>
 				</div>
-			</div>
-		)
+			</div>	
+		);
 	}
-
-
 });
 
 module.exports = LoginForm;

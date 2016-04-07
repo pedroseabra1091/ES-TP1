@@ -16,8 +16,7 @@ def whatever():
 		somePassword = request.json["password"]
 
 		realUser = session.query(Client).filter_by(email = someEmail).first()
-		#print email
-		#print password
+		
 		if realUser == None:
 			return jsonify({
 				'loginState': 'unsuccessful',

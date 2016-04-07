@@ -12,7 +12,7 @@ def create_user():
 	session = Session()
 
 	new_client = Client(name= request.json["name"],email=request.json["email"],password=request.json["password"],contact=request.json["contact"])
-<<<<<<< HEAD
+
 	try:	
 		session.add(new_client)
 		session.commit()
@@ -20,9 +20,4 @@ def create_user():
 		return jsonify(result='IntegrityError failure')
 
 	return jsonify(result='success')
-=======
-	session.add(new_client)
-	session.commit()
 
-	return "Success"
->>>>>>> Login
