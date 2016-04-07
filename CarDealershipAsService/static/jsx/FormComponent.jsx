@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 var FormComponent = React.createClass({
  
@@ -7,7 +8,8 @@ var FormComponent = React.createClass({
             name:"",
             email:"",
             password: "",
-        	contact:""
+        	  contact:"",
+            feedback:""
         };
     },
 
@@ -50,15 +52,22 @@ var FormComponent = React.createClass({
 	  		url: "/api/v1/register",
 	  		contentType: 'application/json',
 	  		dataType: "json",
-	  		data: JSON.stringify(data)
-	  	});
+	  		data: JSON.stringify(data),
+        success:function(result){
+          console.log(result.result);
+          <Link to='/'></Link>
+        },
+        error:function(){
+
+        }
+      });
  	},
 
   render:function(){
     return(
     	<div className="container">
     		<div className="columns">
-				<div className = "column">
+				<div className = "column login">
     				<form onSubmit = {this.handleSubmit} >
     					<label className="label">Name</label>
 	    				<p className="control">
