@@ -5,16 +5,26 @@ var FormComponent = React.createClass({
  
   getInitialState:function() {
         return {
+            client:"",
             name:"",
             email:"",
             password: "",
-        	  contact:"",
-            feedback:""
+        	  contact:""
         };
     },
 
   handleChange: function(type,evt) {
-   	if(type == 'name'){
+    if(type == 'owner'){
+      console.log("owner state");
+      this.setState({client:"false"});
+    }
+
+    else if(type == 'client'){
+      console.log('client state');
+      this.setState({client:"true"});
+    }
+
+   	else if(type == 'name'){
    		this.setState({
    			name: evt.target.value
    		})
@@ -40,6 +50,7 @@ var FormComponent = React.createClass({
   handleSubmit:function(evt){
   	
   	var data = {
+      client: this.state.client,
   		name: this.state.name,
   		email: this.state.email,
   		password: this.state.password,
@@ -66,32 +77,32 @@ var FormComponent = React.createClass({
   render:function(){
     return(
     	<div className="container">
-    		<div className="columns">
-				<div className = "column login">
-    				<form onSubmit = {this.handleSubmit} >
-    					<label className="label">Name</label>
-	    				<p className="control">
-					  		<input className="input is-medium" type="text" value = {this.state.name}  onChange = {this.handleChange.bind(null,'name')}/>
-						  </p>
-  						<label className="label">Email</label>
-  						<p className="control">
-  					  		<input className="input is-medium" type="text" value = {this.state.email}  onChange = {this.handleChange.bind(null,'email')}/>
-  						</p>
-  						<label className="label">Password</label>
-  						<p className="control">
-  					  		<input className="input is-medium" type="password" value = {this.state.password}  onChange = {this.handleChange.bind(null,'password')}/>
-  						</p>
-  						<label className="label">Contact</label>
-  						<p className="control">
-  					  		<input className="input is-medium" type="text" value = {this.state.contact}  onChange = {this.handleChange.bind(null,'contact')}/>
-  						</p>
-              <div className="centerize paddtop">
-  						  <button type="submit" className="button is-success is-large">Register</button>
-              </div>  
-		    		</form>
-	    		</div>	
-	    	</div>
-    	</div>
+  				<div className = "column login">
+      				<form onSubmit = {this.handleSubmit} >
+                <p className="control">
+                    <label className="radio">
+                        <input type="radio" name="useType" onChange={this.handleChange.bind(null,'client')} />
+                      Client
+                    </label>
+                    <label className="radio">
+                        <input type="radio" name ="useType" onChange={this.handleChange.bind(null,'owner')} />
+                      Owner
+                    </label>
+                </p>
+      					<label className="label">Name</label>
+  					  	<input className="input is-medium" type="text" value = {this.state.name}  onChange = {this.handleChange.bind(null,'name')}/>
+    						<label className="label">Email</label>
+    						<input className="input is-medium" type="text" value = {this.state.email}  onChange = {this.handleChange.bind(null,'email')}/>
+    						<label className="label">Password</label>
+    			  		<input className="input is-medium" type="password" value = {this.state.password}  onChange = {this.handleChange.bind(null,'password')}/>
+    						<label className="label">Contact</label>
+    			  		<input className="input is-medium" type="text" value = {this.state.contact}  onChange = {this.handleChange.bind(null,'contact')}/>
+                <div className="centerize paddtop">
+    						  <button type="submit" className="button is-success is-large">Register</button>
+                </div>  
+  		    		</form>
+  	    	  </div>	
+	       </div>
     );
   }
 });

@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 var LoginForm = React.createClass({
 	getInitialState : function(){
 		return ({
+			client: '',
 			email : '', 
 			password : '', 
 			errorState : '',
@@ -12,7 +13,17 @@ var LoginForm = React.createClass({
 	},
 	
 	handleChange : function(type, e){
-		if(type == 'email'){
+		if(type == 'owner'){
+			console.log("owner state");
+			this.setState({client: "false"});
+		}
+
+		else if(type == 'client'){
+			console.log('client state');
+			this.setState({client: "true"});
+		}
+
+		else if(type == 'email'){
 			this.setState({email : e.target.value});
 		}
 		else if(type == 'password'){
@@ -55,6 +66,16 @@ var LoginForm = React.createClass({
 			<div className = "container">
 				<div className = "column login">
 					<form onSubmit={this.handleSubmit}>
+						<p className="control">
+						  <label className="radio">
+						    <input type="radio" name="useType" onChange={this.handleChange.bind(null,'client')} />
+						    Client
+						  </label>
+						  <label className="radio">
+						    <input type="radio" name ="useType" onChange={this.handleChange.bind(null,'owner')} />
+						    Owner
+						  </label>
+						</p>
 						<label className="label">Email</label>
 						<input className="input is-medium" type="text" value={this.state.email} onChange={this.handleChange.bind(null,'email')}/>
 						<label className="label">Password</label>
@@ -64,9 +85,6 @@ var LoginForm = React.createClass({
 							  <Link to="/register"><button type="submit" className="button is-success is-large">Register</button></Link>
 		     			</div>  
 					</form>
-					<div>
-						<p>{this.state.loginState}<br/>{this.state.errorState}</p>
-					</div>
 				</div>
 			</div>	
 		);
