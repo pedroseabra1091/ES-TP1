@@ -1,19 +1,35 @@
 from flask import Flask,request,Blueprint,jsonify,render_template
+from db import engine
+from sqlalchemy.orm import sessionmaker
+from model import Client
 
 login = Blueprint('login',__name__)
 
 @login.route('/api/v1/login',methods = ['GET','POST']) 
-def isRunning():
+def whatever():
 	if request.method == 'POST':
-		email = request.json["email"]
-		password = request.json["password"]
+
+		Session = sessionmaker(bind=engine)
+		session = Session()
+
+		someEmail = request.json["email"]
+		somePassword = request.json["password"]
+
+		realUser = session.query(Client).filter_by(email = someEmail).first()
 		#print email
 		#print password
-		if email != 'joao' or password != 'abc':#fazer query a db
+		if realUser == None:
 			return jsonify({
 				'loginState': 'unsuccessful',
-				'erro': 'email/password invalid'
-				})
+				'erro': 'email nao encontrado'
+			})
+
+		if realUser.password != somePassword:#fazer query a db
+			return jsonify({
+				'loginState': 'unsuccessful',
+				'erro': 'password invalida'
+			})
+			
 		return jsonify({
 			'loginState': 'successful',
 			'erro': ''
