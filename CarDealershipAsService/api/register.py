@@ -13,3 +13,5 @@ def create_user():
 	new_client = Client(name= request.json["name"],email=request.json["email"],password=request.json["password"],contact=request.json["contact"])
 	session.add(new_client)
 	session.commit()
+
+	return "Success"
