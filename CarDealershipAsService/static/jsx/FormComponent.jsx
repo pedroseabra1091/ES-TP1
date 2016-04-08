@@ -65,18 +65,28 @@ var FormComponent = React.createClass({
 	  		dataType: "json",
 	  		data: JSON.stringify(data),
         success:function(result){
-          console.log(result.result);
-          <Link to='/'></Link>
+          if(result.result == "That account already exists"){
+            $("div.notification").html(result.result).show();
+          }
+          else if(result.result == "You didnt choose a user type"){
+            $("div.notification").html(result.result).show();
+          }
+          else
+            console.log("success");
+            
+
         },
         error:function(){
-
+          console.log("error with ajax");
         }
       });
  	},
 
   render:function(){
     return(
-    	<div className="container">
+        
+    	  <div className="container">
+          <div className = "notification is-error"><button className="delete"></button></div>
   				<div className = "column login">
       				<form onSubmit = {this.handleSubmit} >
                 <div className="centerize">

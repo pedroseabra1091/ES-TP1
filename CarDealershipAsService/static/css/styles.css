@@ -59,3 +59,16 @@ label,button{
 .button{
 	margin:10px;
 }
+
+.notification{
+	display: none;
+}
+
+.is-error{
+	background-color: #f05249;
+	font-weight: 500;
+	font-family: MoonLight;
+	color:white;
+	text-align: center;
+}
+

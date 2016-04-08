@@ -10,7 +10,6 @@ register = Blueprint('register',__name__)
 def create_user():
 
 	typeUser = request.json['client']
-	print (typeUser)
 
 	Session = sessionmaker(bind=engine)
 	session = Session()
@@ -23,11 +22,11 @@ def create_user():
 			session.add(new_client)
 			session.commit()
 		except IntegrityError:
-			return jsonify(result='IntegrityError failure')
+			return jsonify(result='That account already exists')
 
 		return jsonify(result='successful insertion of a client')
 
-	else:	
+	elif(typeUser == "false"):	
 
 		new_owner = Owner(name= request.json["name"],email=request.json["email"],password=request.json["password"],contact=request.json["contact"])
 
@@ -35,6 +34,9 @@ def create_user():
 			session.add(new_owner)
 			session.commit()
 		except IntegrityError:
-			return jsonify(result='IntegrityError failure')
+			return jsonify(result='That account already exists')
 
 		return jsonify(result='successful insertion of a owner')
+
+	else:
+		return jsonify(result='You didnt choose a user type')
