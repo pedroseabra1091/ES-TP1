@@ -4,11 +4,9 @@ import {Link} from 'react-router';
 var LoginForm = React.createClass({
 	getInitialState : function(){
 		return ({
-			client: '',
-			email : '', 
-			password : '', 
-			errorState : '',
-			loginState : ''
+			client: "",
+			email : "", 
+			password : ""
 		});
 	},
 	
@@ -41,6 +39,7 @@ var LoginForm = React.createClass({
 
 		//info a enviar para o servidor processar
 		var data = { 
+			client : this.state.client,
 			email : this.state.email,
 			password : this.state.password
 		};
@@ -53,9 +52,24 @@ var LoginForm = React.createClass({
 			type: 'POST',
 			data: JSON.stringify(data),
 			success: function(result){
-				console.log(result);
-				this.setState({errorState:result.erro, loginState:result.loginState});
-			}.bind(this)
+				if(result.result == "Email not found"){
+					console.log('email not found')
+		            $("div.notification").html(result.result).show();
+		        }
+		        else if(result.result == "Invalid password"){
+		        	console.log('pw not found')
+		            $("div.notification").html(result.result).show();
+		        }
+		        else if(result.result == "You didnt choose a user type"){
+		        	console.log('user not found')
+		            $("div.notification").html(result.result).show();
+		        }
+		        else
+            		console.log("success");
+			},
+			error:function(){
+          		console.log("error with ajax");
+        	}
 		});
 		this.setState({email : '', password : ''});
 	},
@@ -64,6 +78,7 @@ var LoginForm = React.createClass({
 
 		return (
 			<div className = "container">
+				<div className = "notification is-error"><button className="delete"></button></div>
 				<div className = "column login">
 					<form onSubmit={this.handleSubmit}>
 					  	<div className="centerize">
