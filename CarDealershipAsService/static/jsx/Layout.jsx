@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 import Footer from './Footer.jsx';
 
@@ -7,7 +8,7 @@ var Layout = React.createClass ({
     return(
     	<div className = "leftrize">
 	    	<div className="inlinelocked">
-	    		<img src ="../static/assets/car_dealer.png" />
+	    		<Link to="/"><img src ="../static/assets/car_dealer.png" /></Link>
 	    	</div>
 	    	<h1 className="title inlinelocked">Car dealership as a service</h1>
 	    	<div> 

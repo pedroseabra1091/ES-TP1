@@ -71,10 +71,9 @@ var FormComponent = React.createClass({
           else if(result.result == "You didnt choose a user type"){
             $("div.notification").html(result.result).show();
           }
-          else
-            console.log("success");
-            
-
+          else{
+            console.log(result.result);
+          }
         },
         error:function(){
           console.log("error with ajax");
