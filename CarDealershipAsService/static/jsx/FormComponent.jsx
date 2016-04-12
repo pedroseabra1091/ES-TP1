@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link, browserHistory } from 'react-router';
 
 var FormComponent = React.createClass({
  
@@ -66,13 +66,14 @@ var FormComponent = React.createClass({
 	  		data: JSON.stringify(data),
         success:function(result){
           if(result.result == "That account already exists"){
-            $("div.notification").html(result.result).show();
+            $("div.notification").html(result.result).show().delay(2500).fadeOut();
           }
           else if(result.result == "You didnt choose a user type"){
-            $("div.notification").html(result.result).show();
+            $("div.notification").html(result.result).show().delay(2500).fadeOut();
           }
           else{
             console.log(result.result);
+            browserHistory.push('/');
           }
         },
         error:function(){
@@ -82,6 +83,11 @@ var FormComponent = React.createClass({
  	},
 
   render:function(){
+
+    var styles = {
+      color: "black"
+    };
+
     return(
         
     	  <div className="container">
@@ -107,7 +113,7 @@ var FormComponent = React.createClass({
     						<label className="label">Contact</label>
     			  		<input className="input is-medium" type="text" value = {this.state.contact}  onChange = {this.handleChange.bind(null,'contact')}/>
                 <div className="centerize paddtop">
-    						  <button type="submit" className="button is-success is-large">Register</button>
+    						  <button type="submit" style={styles} className="button is-success is-large">Register</button>
                 </div>  
   		    		</form>
   	    	  </div>	

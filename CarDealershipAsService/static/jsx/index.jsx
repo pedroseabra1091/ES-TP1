@@ -5,6 +5,8 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import Layout from './Layout.jsx';
 import Register from './Register.jsx';
 import Login from './Login.jsx';
+import DashboardClient from './DashboardClient.jsx';
+import DashboardOwner from './DashboardOwner.jsx';
 
 
 const app = document.getElementById('app');
@@ -14,6 +16,8 @@ ReactDOM.render(
 				<IndexRoute component={Login} />
 				<Route path="login" component={Login}/>
 				<Route path="register" component={Register}/>
+				<Route path="dashboardClient" component={DashboardClient}/>
+				<Route path="dashboardOwner" component={DashboardOwner}/>
 			</Route>
 	</Router>
 ,app);

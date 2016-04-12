@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link,browserHistory } from 'react-router';
 
 var LoginForm = React.createClass({
 	getInitialState : function(){
@@ -54,19 +54,27 @@ var LoginForm = React.createClass({
 			success: function(result){
 				if(result.result == "Email not found"){
 					console.log('email not found')
-		            $("div.notification").html(result.result).show();
+		            $("div.notification").html(result.result).show().delay(2500).fadeOut();
 		        }
 		        else if(result.result == "Invalid password"){
 		        	console.log('pw not found')
-		            $("div.notification").html(result.result).show();
+		            $("div.notification").html(result.result).show().delay(2500).fadeOut();
 		        }
 		        else if(result.result == "You didnt choose a user type"){
 		        	console.log('user not found')
-		            $("div.notification").html(result.result).show();
+		            $("div.notification").html(result.result).show().delay(2500).fadeOut();
 		        }
-		        else
+		        else{
             		console.log("success");
-			},
+            		if(this.state.client == "true"){
+            			console.log(this.props.email);
+		        		browserHistory.push('/dashboardClient');
+
+            		}
+		        	else
+		        		browserHistory.push('/dashboardOwner');
+		        }
+			}.bind(this),
 			error:function(){
           		console.log("error with ajax");
         	}
@@ -75,6 +83,10 @@ var LoginForm = React.createClass({
 	},
 
 	render: function(){
+
+		var styles = {
+			color: "black"
+		}
 
 		return (
 			<div className = "container">
@@ -96,8 +108,8 @@ var LoginForm = React.createClass({
 						<label className="label">Password</label>
 						<input className="input is-medium" type="password" value={this.state.password} onChange={this.handleChange.bind(null,'password')}/>
 						<div className="centerize paddtop">
-						  <button type="submit" className="button is-info is-large buttonmargin">Login</button>
-							  <Link to="/register"><button type="submit" className="button is-success is-large">Register</button></Link>
+						  <button type="submit" style={styles} className="button is-info is-large buttonmargin">Login</button>
+						  <Link to="/register"><button type="submit" style={styles} className="button is-success is-large">Register</button></Link>
 		     			</div>  
 					</form>
 				</div>

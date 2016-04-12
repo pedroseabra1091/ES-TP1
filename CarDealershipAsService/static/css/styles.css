@@ -5,7 +5,11 @@ html,body{
 	background-color:#e5e5e5;
 	height:100%;
 }
-label,button{
+button{
+	font-family: MoonLight;
+	color:black;
+}
+label{
 	font-family: MoonLight;
 	color:white;
 }
@@ -38,6 +42,9 @@ label,button{
 .inlinelocked{
 	display: inline-block;
 }
+.inlinelocked img{
+	padding-left: 14px;
+}
 .title{
 	color:white;
 	font-family: MoonLight;
@@ -52,12 +59,15 @@ label,button{
 	width: 500px;
     display: block;
     margin: 0 auto;
-    background-color: #9f9f9f;
+    background-color: #424242;
     border-radius: 4px;
     padding: 57px;
 }
 .button{
 	margin:10px;
+}
+.is-info{
+	color:black;
 }
 
 .notification{
@@ -65,10 +75,15 @@ label,button{
 }
 
 .is-error{
-	background-color: #f05249;
+	background-color: #ffc052;
 	font-weight: 500;
 	font-family: MoonLight;
-	color:white;
+	color:black;
 	text-align: center;
 }
+
+.paddleft{
+	padding-left: 32px;
+}
+
 

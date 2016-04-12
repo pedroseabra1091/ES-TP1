@@ -8,7 +8,7 @@ var Layout = React.createClass ({
     return(
     	<div className = "leftrize">
 	    	<div className="inlinelocked">
-	    		<Link to="/"><img src ="../static/assets/car_dealer.png" /></Link>
+	    		<Link to="/"><img src ="../static/assets/car_logo.png" /></Link>
 	    	</div>
 	    	<h1 className="title inlinelocked">Car dealership as a service</h1>
 	    	<div> 
