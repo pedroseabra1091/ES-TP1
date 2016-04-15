@@ -11,39 +11,47 @@ def user_login():
 
 	if request.method == 'POST':
 
-		typeUser = request.json['client']
+		userType = request.json['user']
 		requested_email = request.json["email"]
 		requested_password = request.json["password"]
 
 		Session = sessionmaker(bind=engine)
 		session = Session()
 
-		if(typeUser == "true"):
+		if(userType == "client"):
 
 			client = session.query(Client).filter_by(email = requested_email).first()
 			
 			if client == None:
-				return jsonify(result='Email not found')
+				return jsonify({'message':'Email not found'})
 
 			elif client.password != requested_password:
-				return jsonify(result='Invalid password')
-			
-			else:	
-				return jsonify(result='success')
+				return jsonify({'message':'Invalid password'})
 
-		elif(typeUser == "false"):
+			else:
+				print client.id
+
+				return jsonify({
+					'id' : client.id,
+					'userType' : 'client'
+				})
+
+		elif(userType == "owner"):
 
 			owner = session.query(Owner).filter_by(email = requested_email).first()
 			
 			if owner == None:
-				return jsonify(result='Email not found')
+				return jsonify({'message':'Email not found'})
 
 			elif owner.password != requested_password:
-				return jsonify(result='Invalid password')
+				return jsonify({'message':'Invalid password'})
 			
 			else: 		
-				return jsonify(result='success')	
+				return jsonify({
+					'id' : owner.id,
+					'userType' : 'owner'
+				})	
 		else:
-			return jsonify(result='You didnt choose a user type')
+			return jsonify({'message' : 'You didnt choose a user type'})
 	else:
 		return render_template('index.html')

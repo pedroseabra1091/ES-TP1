@@ -4,7 +4,7 @@ import { Link,browserHistory } from 'react-router';
 var LoginForm = React.createClass({
 	getInitialState : function(){
 		return ({
-			client: "",
+			user: "",
 			email : "", 
 			password : ""
 		});
@@ -13,12 +13,12 @@ var LoginForm = React.createClass({
 	handleChange : function(type, e){
 		if(type == 'owner'){
 			console.log("owner state");
-			this.setState({client: "false"});
+			this.setState({user: "owner"});
 		}
 
 		else if(type == 'client'){
 			console.log('client state');
-			this.setState({client: "true"});
+			this.setState({user: "client"});
 		}
 
 		else if(type == 'email'){
@@ -39,7 +39,7 @@ var LoginForm = React.createClass({
 
 		//info a enviar para o servidor processar
 		var data = { 
-			client : this.state.client,
+			user : this.state.user,
 			email : this.state.email,
 			password : this.state.password
 		};
@@ -52,27 +52,30 @@ var LoginForm = React.createClass({
 			type: 'POST',
 			data: JSON.stringify(data),
 			success: function(result){
-				if(result.result == "Email not found"){
+				if(result.message == "Email not found"){
 					console.log('email not found')
-		            $("div.notification").html(result.result).show().delay(2500).fadeOut();
+		            $("div.notification").html(result.message).show().delay(2500).fadeOut();
 		        }
-		        else if(result.result == "Invalid password"){
+		        else if(result.message == "Invalid password"){
 		        	console.log('pw not found')
-		            $("div.notification").html(result.result).show().delay(2500).fadeOut();
+		            $("div.notification").html(result.message).show().delay(2500).fadeOut();
 		        }
-		        else if(result.result == "You didnt choose a user type"){
+		        else if(result.message == "You didnt choose a user type"){
 		        	console.log('user not found')
-		            $("div.notification").html(result.result).show().delay(2500).fadeOut();
+		            $("div.notification").html(result.message).show().delay(2500).fadeOut();
 		        }
 		        else{
-            		console.log("success");
-            		if(this.state.client == "true"){
-            			console.log(this.props.email);
-		        		browserHistory.push('/dashboardClient');
+            		console.log('success');
+            		if(this.state.user == "client"){
+            			console.log(result.id)
+		        		browserHistory.push('/dashboardClient/' + result.userType + '/' + result.id);
 
             		}
+		        	else if(this.state.user == "owner"){
+		        		browserHistory.push('/dashboardOwner/' + result.id + result.userType + '/' + result.id);
+		        	}
 		        	else
-		        		browserHistory.push('/dashboardOwner');
+		        		browserHistory.push('/');
 		        }
 			}.bind(this),
 			error:function(){

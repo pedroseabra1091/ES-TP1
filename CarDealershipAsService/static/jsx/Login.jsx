@@ -8,7 +8,7 @@ var Login = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<LoginForm client={this.props.client}/>
+				<LoginForm />
 			</div>
 		);
 	}

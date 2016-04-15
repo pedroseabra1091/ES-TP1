@@ -5,7 +5,7 @@ var FormComponent = React.createClass({
  
   getInitialState:function() {
         return {
-            client:"",
+            user:"",
             name:"",
             email:"",
             password: "",
@@ -16,12 +16,12 @@ var FormComponent = React.createClass({
   handleChange: function(type,evt) {
     if(type == 'owner'){
       console.log("owner state");
-      this.setState({client:"false"});
+      this.setState({user:"owner"});
     }
 
     else if(type == 'client'){
       console.log('client state');
-      this.setState({client:"true"});
+      this.setState({user:"client"});
     }
 
    	else if(type == 'name'){
@@ -50,7 +50,7 @@ var FormComponent = React.createClass({
   handleSubmit:function(evt){
   	
   	var data = {
-      client: this.state.client,
+      user: this.state.user,
   		name: this.state.name,
   		email: this.state.email,
   		password: this.state.password,
@@ -65,14 +65,15 @@ var FormComponent = React.createClass({
 	  		dataType: "json",
 	  		data: JSON.stringify(data),
         success:function(result){
-          if(result.result == "That account already exists"){
-            $("div.notification").html(result.result).show().delay(2500).fadeOut();
+          
+          if(result.message == "That account already exists"){
+            $("div.notification").html(result.message).show().delay(2500).fadeOut();
           }
-          else if(result.result == "You didnt choose a user type"){
-            $("div.notification").html(result.result).show().delay(2500).fadeOut();
+          else if(result.message == "You didnt choose a user type"){
+            $("div.notification").html(result.message).show().delay(2500).fadeOut();
           }
           else{
-            console.log(result.result);
+            console.log(result.message);
             browserHistory.push('/');
           }
         },

@@ -1,45 +1,45 @@
 import React from 'react';
+import Profile from './Profile.jsx';
+import Search from './Search.jsx';
 
 var DashboardClient = React.createClass({
 
-	getInitialState() {
-	    return {
-	        email:this.props.email;
-	    };
+	getInitialState: function(){
+		console.log(this.props.params.userType);
+		console.log(this.props.params.id);
+	    return ({
+	        profile : false,
+	        search : false  
+	    });
 	},
 
-	componentWillReceiveProps: function(props) {
-	    this.setState({client: nextProps.email});
+	handleClick: function(type,e){
+		if(type == 'Profile'){
+			this.setState({'profile' : true})
+			this.setState({'search' : false})
+		}
+		else if(type == 'Search'){ 
+			this.setState({'search' : true})
+			this.setState({'profile' : false})
+		}
+		else
+			console.log('Unknown click');
 	},
 
 	render: function() {
 		return (
-			<div className="columns">
-			  <div className="column is-quarter paddleft">
-			  	<aside className="menu">
-			  	  <img src = "../static/assets/user_logo.png" />
-				  <p className="menu-label">
-				  	{this.props.email} 
-				  </p>
-				 
-				  <p className="menu-label">
-				  Profile   
-				  </p>
-				  <ul className="menu-list">
-				    <li>View profile</li>
-				    <li>
-				      <a className="is-active" href="#">Edit profile</a>
-				      <ul>
-				        <li>Change password</li>
-				        <li>Change contact</li>
-				        <li>Change email</li>
-				      </ul>
-				    </li>
+			<div className = "container">
+				<div className="tabs is-centered">
+				  <ul>
+				    <li onClick = {this.handleClick.bind(null,'Profile')}><a><h2 className = "title menu">Profile</h2></a></li>
+				    <li onClick = {this.handleClick.bind(null,'Search')}><a><h2 className = "title menu">Search</h2></a></li>
+				    <li onClick = {this.handleClick.bind(null,'Search')}><a><h2 className = "title menu">Logout</h2></a></li>
 				  </ul>
-				</aside>
-			  </div>
-			  <div className="column Auto"></div>
-			</div>
+				</div>
+				 {this.state.profile ? <Profile userType = {this.props.params.userType} id = {this.props.params.id} /> : null}
+				 {this.state.search ? <Search /> : null}
+				 {this.props.children}
+			</div> 
 		);
 	}
 

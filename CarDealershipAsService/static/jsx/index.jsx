@@ -16,8 +16,8 @@ ReactDOM.render(
 				<IndexRoute component={Login} />
 				<Route path="login" component={Login}/>
 				<Route path="register" component={Register}/>
-				<Route path="dashboardClient" component={DashboardClient}/>
-				<Route path="dashboardOwner" component={DashboardOwner}/>
+				<Route path="dashboardClient/:userType/:id" component={DashboardClient}/>
+				<Route path="dashboardOwner/:userType/:id" component={DashboardOwner}/>
 			</Route>
 	</Router>
 ,app);

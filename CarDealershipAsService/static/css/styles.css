@@ -2,12 +2,15 @@
 @font-face { font-family: MoonLight; font-weight: bold; src: url('Moon Bold.otf');}
 
 html,body{
-	background-color:#e5e5e5;
+	background-color:#d0d6dc;
 	height:100%;
 }
 button{
 	font-family: MoonLight;
 	color:black;
+}
+p,li,a{
+	font-family: "Josefin Sans";
 }
 label{
 	font-family: MoonLight;
@@ -52,6 +55,13 @@ label{
     bottom: 45px;
     padding: 30px;
 }
+.menu{
+	bottom:0px;
+	padding: 10px;
+	color:#424242;
+	font-size: 24px;
+}
+
 .container{
 	padding-top: 30px;
 }
@@ -85,5 +95,36 @@ label{
 .paddleft{
 	padding-left: 32px;
 }
+.is-centered > ul{
+	border-bottom:1px solid black;
+}
+.is-centered a{
+	border-bottom:1px solid black;
+}
+
+
+.is-centered h2{
+	color: #424242;
+}
+
+.is-centered h2:hover{
+	color:#ffc052;
+}
+
+.is-centered a:hover{
+	border-bottom: 1px solid #ffc052;
+}
+
+p{
+	color:white;
+}
+
+.userName{
+	display: None;
+	font-size: 50px;
+	font-weight: 600;
+}
+
+
 
 
