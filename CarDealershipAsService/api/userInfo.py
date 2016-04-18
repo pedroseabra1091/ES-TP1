@@ -17,12 +17,13 @@ def getInfo():
 	if(typeUser == 'client'):
 
 		client = session.query(Client).filter_by(id = userId).first()
-
-		print "going to return name"
+		
 		return jsonify({
 
 			'name': client.name,
-			'contact' : client.contact
+			'contact' : client.contact,
+			'email' : client.email,
+			'password' : client.password
 
 		})
 
@@ -32,7 +33,9 @@ def getInfo():
 
 		return jsonify({
 			'name' : owner.name,
-			'contact' : client.contact
+			'contact' : owner.contact,
+			'email' : owner.email,
+			'password' : owner.password
 		})
 
 	else:

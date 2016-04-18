@@ -65,14 +65,13 @@ var LoginForm = React.createClass({
 		            $("div.notification").html(result.message).show().delay(2500).fadeOut();
 		        }
 		        else{
-            		console.log('success');
+            		console.log('successful login');
             		if(this.state.user == "client"){
-            			console.log(result.id)
 		        		browserHistory.push('/dashboardClient/' + result.userType + '/' + result.id);
 
             		}
 		        	else if(this.state.user == "owner"){
-		        		browserHistory.push('/dashboardOwner/' + result.id + result.userType + '/' + result.id);
+		        		browserHistory.push('/dashboardOwner/' + result.userType + '/' + result.id);
 		        	}
 		        	else
 		        		browserHistory.push('/');
@@ -98,11 +97,11 @@ var LoginForm = React.createClass({
 					<form onSubmit={this.handleSubmit}>
 					  	<div className="centerize">
 							  <label className="radio">
-							    <input type="radio" name="useType" onChange={this.handleChange.bind(null,'client')} />
+							    <input className ="pick-user" type="radio" name="useType" onChange={this.handleChange.bind(null,'client')} />
 							    Client
 							  </label>
 							  <label className="radio">
-							    <input type="radio" name ="useType" onChange={this.handleChange.bind(null,'owner')} />
+							    <input className ="pick-user" type="radio" name ="useType" onChange={this.handleChange.bind(null,'owner')} />
 							    Owner
 							  </label>
 						</div>

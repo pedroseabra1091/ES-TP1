@@ -1,11 +1,16 @@
 import React from 'react';
+import Panel from './Panel.jsx';
+import Board from './Board.jsx';
 
 var Search = React.createClass({
 
 	render: function() {
 		return (
-			<div>
-				<h1>Search component</h1>
+			<div className="columns">
+			  <div className="column is-one-quarter">
+			    <Panel />
+			  </div>
+			  <Board />
 			</div>
 		);
 	}

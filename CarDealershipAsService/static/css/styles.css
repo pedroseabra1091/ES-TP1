@@ -22,13 +22,28 @@ label{
     font-weight: normal;
 }
 
+.pick-user{
+	position: relative;
+	top:2px;
+	margin-right: 4px;
+}
+
 .centerize{
 	display: block;
     margin: 0 auto;
     text-align: center;
 }
+.rightrize{
+	position: relative;
+	left:27%;
+	text-align: none;
+}
+
 .paddtop{
 	padding-top: 28px;
+}
+.paddtop-profile{
+	padding-top: 41px;
 }
 .leftrize{
 	display: block;
@@ -72,6 +87,7 @@ label{
     background-color: #424242;
     border-radius: 4px;
     padding: 57px;
+    box-shadow: 0 2px 3px;
 }
 .button{
 	margin:10px;
@@ -82,14 +98,14 @@ label{
 
 .notification{
 	display: none;
-}
-
-.is-error{
-	background-color: #ffc052;
 	font-weight: 500;
 	font-family: MoonLight;
 	color:black;
 	text-align: center;
+}
+
+.is-error{
+	background-color: #ffc052;
 }
 
 .paddleft{
@@ -101,7 +117,6 @@ label{
 .is-centered a{
 	border-bottom:1px solid black;
 }
-
 
 .is-centered h2{
 	color: #424242;
@@ -125,6 +140,71 @@ p{
 	font-weight: 600;
 }
 
+.userParams{
+	font-size:26px;
+	color:white;
+	text-align: left;
+	font-family: "Josefin Sans";
+}
+
+.userData{
+	font-size: 20px;
+	padding-left: 10px;
+}
+
+.userProps{
+	font-size: 20px;
+	padding-left: 10px;
+}
+.customInput{
+    width: 280px;
+    background-color: transparent;
+    border-color: #424242;
+    margin : 0 auto;
+    border-width: 2px;
+}
+.carInput{
+	width:350px;
+}
+.menu-search{
+	font-size: 19px;
+	margin-left: 4px;
+}
+.menu-dealership{
+	font-size: 19px;
+	margin-left: 4px;
+	margin-top: 40px;
+}
 
 
+.menu-list a:hover{
+	background-color: #ffc052;
+	color:white;
+}
+.card{
+	display: inline-block;
+	margin-top: 52px;
+	margin-right: 19px;
+}
+
+.form-dealership{
+	width:286px;
+	display: block;
+	margin:0 auto;
+}
+.car-form{
+	width:350px;
+	padding-top: 27px;
+}
+.absoluted{
+	position:absolute;
+}
+.margin-paddtop{
+	padding-top: 55px;
+	margin: auto;
+}
+.margin-nopadd{
+	margin:auto;
+	padding-top: 0px;
+}
 

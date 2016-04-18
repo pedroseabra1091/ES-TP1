@@ -1,13 +1,13 @@
 import React from 'react';
 
-import FormComponent from './FormComponent.jsx';
+import RegistComponent from './RegistComponent.jsx';
 
 var Register = React.createClass ({
 
   render: function(){
     return(
     	<div>
-    		<FormComponent />
+    		<RegistComponent />
     	</div>
     );
   }

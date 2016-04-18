@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
 
-var FormComponent = React.createClass({
+var RegistComponent = React.createClass({
  
   getInitialState:function() {
         return {
@@ -123,4 +123,4 @@ var FormComponent = React.createClass({
   }
 });
 
-module.exports = FormComponent;
+module.exports = RegistComponent;
