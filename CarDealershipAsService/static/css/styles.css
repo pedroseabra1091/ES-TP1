@@ -70,6 +70,7 @@ label{
     bottom: 45px;
     padding: 30px;
 }
+
 .menu{
 	bottom:0px;
 	padding: 10px;
@@ -207,4 +208,10 @@ p{
 	margin:auto;
 	padding-top: 0px;
 }
-
+.carInfo{
+	color:black;
+}
+.car-img{
+	height:225px;
+	width:300px;
+}

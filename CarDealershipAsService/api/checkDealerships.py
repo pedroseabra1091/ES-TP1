@@ -9,11 +9,12 @@ checkDealerships = Blueprint('checkDealerships',__name__)
 def check_dealerships():
 
 	userId = request.json['id']
-	names = []
+	dealership_list = []
 	
 	Session = sessionmaker(bind=engine)
 	session = Session()
 	
-	dealerships = session.query(Dealership).filter_by(ownerID = userId).all()
-	names = [dealership.name for dealership in dealerships]
-	return jsonify(names = names)
+	for dealership in session.query(Dealership).filter_by(ownerID = userId).all():
+		dealership_list.append({'id' : dealership.id, 'name' : dealership.name})
+	
+	return jsonify(data = dealership_list)

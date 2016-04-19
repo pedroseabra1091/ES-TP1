@@ -3,8 +3,6 @@ import React from 'react';
 var CarForm = React.createClass({
 
 	getInitialState:function() {
-    console.log('shoot id');
-		console.log(this.props.id);
         return {
            dealership:"",
            brand:"",
@@ -32,11 +30,10 @@ var CarForm = React.createClass({
         dataType: "json",
         data: JSON.stringify(data),
         success:function(result){
-          console.log('lets go');
-          $.each(result.names, function(key,name) {
+          $.each(result.data, function(index,dealership) {
               $('#dealerships').append($("<option/>", {
-                  value: name,
-                  text: name
+                  value: dealership.id,
+                  text: dealership.name
               }));
           });
         },
