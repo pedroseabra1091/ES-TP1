@@ -17,12 +17,6 @@ var Board = React.createClass({
 				        <p className="subtitle is-6">johnsmith</p>
 				      </div>
 				    </div>
-				    <div className="content">
-				      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-				      Phasellus nec iaculis mauris.
-				      <br></br>
-				      <small>11:09 PM - 1 Jan 2016</small>
-				    </div>
 			 	 </div>
 			  </div>
 			  <div className="card">
