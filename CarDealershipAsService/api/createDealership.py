@@ -13,7 +13,7 @@ def create_Dealership():
 	Session = sessionmaker(bind=engine)
 	session = Session()
 	
-	owner = session.query(Owner).filter_by(id = userId).first()
+	owner = session.query(Owner).filter_by(id = userId)
 	dealership = Dealership(name = request.json['name'],contact = request.json['contact'],location = request.json['location'])
 	
 	owner.dealers.append(dealership)

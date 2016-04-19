@@ -3,8 +3,10 @@ import React from 'react';
 var CarForm = React.createClass({
 
 	getInitialState:function() {
+    console.log('shoot id');
 		console.log(this.props.id);
         return {
+           dealership:"",
            brand:"",
            model:"",
            color:"",
@@ -16,45 +18,78 @@ var CarForm = React.createClass({
         };
   },
 
+  componentDidMount: function() {
+    
+    var data = {
+      id : this.props.id,
+      user : this.props.userType
+    };
+
+    $.ajax({
+        type:"POST",
+        url: "/api/v1/checkDealerships",
+        contentType: 'application/json',
+        dataType: "json",
+        data: JSON.stringify(data),
+        success:function(result){
+          console.log('lets go');
+          $.each(result.names, function(key,name) {
+              $('#dealerships').append($("<option/>", {
+                  value: name,
+                  text: name
+              }));
+          });
+        },
+        error:function(){
+          console.log("error with ajax");
+        }
+      });
+  },
+
   handleChange: function(type,evt) {
-   	if(type == 'brand'){
+    if(type == 'Dealership'){
+      this.setState({
+        dealership:evt.target.value
+      })
+    }
+   	else if(type == 'Brand'){
    		this.setState({
    			brand: evt.target.value
    		})
    	}
-    else if(type == 'model'){
+    else if(type == 'Model'){
     	this.setState({
-    		location: evt.target.value
+    		model: evt.target.value
     	})
     }
-    else if(type == 'color'){
+    else if(type == 'Color'){
     	this.setState({
-    		contact: evt.target.value
+    		color: evt.target.value
     	})
     }
-    else if(type == 'plate'){
+    else if(type == 'Plate'){
       this.setState({
-        contact: evt.target.value
+        plate: evt.target.value
       })
     }
-    else if(type == 'mileage'){
+    else if(type == 'Mileage'){
       this.setState({
-        contact: evt.target.value
+        mileage: evt.target.value
       })
     }
-    else if(type == 'fuelType'){
+    else if(type == 'FuelType'){
       this.setState({
-        contact: evt.target.value
+        fuelType: evt.target.value
       })
     }
-    else if(type == 'year'){
+    else if(type == 'Year'){
       this.setState({
-        contact: evt.target.value
+        year: evt.target.value
       })
     }
-    else if(type == 'price'){
+    else if(type == 'Price'){
       this.setState({
-        contact: evt.target.value
+        price: evt.target.value
       })
     }
   },
@@ -63,6 +98,7 @@ var CarForm = React.createClass({
   	
   	var data = {
       id: this.props.id,
+      dealership: this.state.dealership,
   	  brand:this.state.brand,
       model:this.state.model,
       color:this.state.color,
@@ -76,14 +112,13 @@ var CarForm = React.createClass({
   	evt.preventDefault();
 	  	$.ajax({
 	  		type:"POST",
-	  		url: "/api/v1/addCar",
+	  		url: "/api/v1/createCar",
 	  		contentType: 'application/json',
 	  		dataType: "json",
 	  		data: JSON.stringify(data),
         success:function(result){
-            console.log(result.message);
             $("div.notification").html(result.message).show().delay(2500).fadeOut();
-        },
+        }.bind(this),
         error:function(){
           console.log('ajax error');
         }
@@ -97,47 +132,47 @@ var CarForm = React.createClass({
     };
 
     return(
-            <div>
-              <div className = "notification is-error"><button className="delete"></button></div>
-              <div className="column is-half absoluted margin-paddtop">
-        				<form className ="form-dealership" onSubmit = {this.handleSubmit} >
-          					 <span className=" userParams">Dealership</span>
-                    <select className="input customInput">
-                      <option>Autotrader</option>
-                    </select>
-                    <span className=" userParams">Brand</span>
-                    <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'name')}/>
-                    <br></br>
-                    <span className=" userParams">Model</span>
-                    <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'contact')}/>
-                    <br></br>
-                    <span className=" userParams">Color</span>
-                    <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'location')}/>
-                    <br></br>
-                    <span className=" userParams">Plate</span>
-                    <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'location')}/>
-                    <br></br>
-                    <span className=" userParams">Mileage</span>
-                    <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'location')}/>
-                    <br></br>
-                    <span className=" userParams">Fuel type</span>
-                    <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'location')}/>
-                    <br></br>
-                    <span className=" userParams">Year</span>
-                    <select className="input customInput">
-                      <option>Gas</option>
-                      <option>Gasoline</option>
-                      <option>Diesel</option>
-                    </select>
-                    <br></br>
-                    <span className=" userParams">Price</span>
-                    <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'location')}/>
-                    <div className="centerize paddtop">
-                      <button type="submit" style={styles} className="button is-warning is-large">Add Car</button>
-                    </div>  
-        	    	</form>
-              </div>
-            </div>
+        <div className="column is-half absoluted margin-paddtop">
+          <div className = "notification is-error"><button className="delete"></button></div>
+  				<form className ="form-dealership" onSubmit = {this.handleSubmit} >
+    					 <span className=" userParams">Dealership</span>
+              <select id="dealerships" className="input customInput" onChange = {this.handleChange.bind(null,'Dealership')}>
+              <option></option>
+              </select>
+              <br></br>
+              <span className=" userParams">Brand</span>
+              <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'Brand')}/>
+              <br></br>
+              <span className=" userParams">Model</span>
+              <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'Model')}/>
+              <br></br>
+              <span className=" userParams">Color</span>
+              <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'Color')}/>
+              <br></br>
+              <span className=" userParams">Plate</span>
+              <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'Plate')}/>
+              <br></br>
+              <span className=" userParams">Mileage</span>
+              <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'Mileage')}/>
+              <br></br>
+              <span className=" userParams">Year</span>
+              <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'Year')}/>
+              <br></br>
+              <span className=" userParams">Fuel Type</span>
+              <select className="input customInput" onChange = {this.handleChange.bind(null,'FuelType')}>
+                <option></option>
+                <option>Gas</option>
+                <option>Gasoline</option>
+                <option>Diesel</option>
+              </select>
+              <br></br>
+              <span className=" userParams">Price</span>
+              <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'Price')}/>
+              <div className="centerize paddtop">
+                <button type="submit" style={styles} className="button is-warning is-large">Add Car</button>
+              </div>  
+  	    	</form>
+      </div>
     );
   }
 });
