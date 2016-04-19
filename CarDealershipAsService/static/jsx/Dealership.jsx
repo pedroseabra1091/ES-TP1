@@ -4,6 +4,7 @@ import CarForm from './CarForm.jsx';
 import DealershipForm from './DealershipForm.jsx';
 import Search from './Search.jsx';
 import SomeDealerships from './SomeDealerships.jsx';
+import OwnerDealerships from './OwnerDealerships.jsx';
 
 var Dealership = React.createClass({
 
@@ -76,7 +77,7 @@ var Dealership = React.createClass({
 				</aside>
 			  </div>
 		  		{this.state.create ? <DealershipForm id = {this.props.id}  /> : null}
-			 	{this.state.myDealership ? <Search /> : null}
+			 	{this.state.myDealership ? <OwnerDealerships id={this.props.id} /> : null}
 				{this.state.otherDealerships ? <SomeDealerships /> : null}
 				{this.state.viewCars ? <Search /> : null}
 				{this.state.addCar ? <CarForm  id = {this.props.id} /> : null}

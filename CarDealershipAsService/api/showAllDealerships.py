@@ -14,18 +14,12 @@ def listDealerships():
 	session = Session()
 
 
-	print "I'm here!!!"
-
 	myList = []
-	
-	i=0
 
-	for deals in session.query(Dealership.name,Dealership.location, Owner.name).filter(Dealership.ownerID==Owner.id).all():
-		print deals
-		print deals[0]
-		print deals[1]
-		myList.append( {'id':i , 'owner': deals[2], 'deal_name': deals[0], 'location' : deals[1]})
-		i = i+1
+
+	for deals in session.query(Dealership.id, Dealership.name,Dealership.location, Owner.name).filter(Dealership.ownerID==Owner.id).all():
+		#print deals
+		myList.append( {'id':deals[0] , 'deal_name': deals[1], 'location' : deals[2], 'owner': deals[3]})
 
 	print myList
 
