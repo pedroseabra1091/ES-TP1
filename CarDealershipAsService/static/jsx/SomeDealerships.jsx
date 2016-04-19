@@ -79,7 +79,7 @@ var SomeDealerships = React.createClass({
           <tbody>
             <tr>
               <td>
-                <h4 onClick={this.handleClick.bind(null,'Dealership')}>Dealership</h4>
+                <h4 onClick={this.handleClick.bind(null,'Dealership')}><a>Dealership</a></h4>
                 <ul>
                   {this.state.droid.map(function(deals) {
                     return (

@@ -9,7 +9,7 @@ var OwnerDealerships = React.createClass({
   },
 
   componentDidMount: function() {
-    var someData = { id : "1"};
+    var someData = { id : this.props.id};
     console.log(someData);
 
     $.ajax({
