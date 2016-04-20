@@ -3,12 +3,9 @@ import React from 'react';
 import CarForm from './CarForm.jsx';
 import DealershipForm from './DealershipForm.jsx';
 import Search from './Search.jsx';
-<<<<<<< HEAD
 import MyCars from './MyCars.jsx';
-=======
 import SomeDealerships from './SomeDealerships.jsx';
 import OwnerDealerships from './OwnerDealerships.jsx';
->>>>>>> 2ee70f2a34c44e85ae3a819d7e737fbb3ebfec9f
 
 var Dealership = React.createClass({
 
@@ -81,15 +78,9 @@ var Dealership = React.createClass({
 				</aside>
 			  </div>
 		  		{this.state.create ? <DealershipForm id = {this.props.id}  /> : null}
-<<<<<<< HEAD
-			 	{this.state.myDealership ? <Search /> : null}
-				{this.state.otherDealerships ? <Search /> : null}
-				{this.state.viewCars ? <MyCars id = {this.props.id} /> : null}
-=======
 			 	{this.state.myDealership ? <OwnerDealerships id={this.props.id} /> : null}
 				{this.state.otherDealerships ? <SomeDealerships /> : null}
-				{this.state.viewCars ? <Search /> : null}
->>>>>>> 2ee70f2a34c44e85ae3a819d7e737fbb3ebfec9f
+				{this.state.viewCars ? <MyCars id = {this.props.id} /> : null}
 				{this.state.addCar ? <CarForm  id = {this.props.id} /> : null}
 				{this.props.children}
 			</div>

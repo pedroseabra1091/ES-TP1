@@ -15,7 +15,6 @@ var MyCars = React.createClass({
         dataType: "json",
         data: JSON.stringify(data),
         success:function(result){	
-        	 console.log('say what!');
         	 console.log(result.data)
 	    	 $.each(result.data, function(index,car) {
 	           	$('#card-container').append(
