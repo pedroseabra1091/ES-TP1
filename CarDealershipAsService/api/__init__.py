@@ -6,3 +6,6 @@ from .createDealership import createDealership
 from .checkDealerships import checkDealerships
 from .createCar import createCar
 from .viewMyCars import viewMyCars
+from .showAllDealerships import showAllDealerships
+from .showOwnerDealerships import showOwnerDealerships
+from .allUsers import allUsers
