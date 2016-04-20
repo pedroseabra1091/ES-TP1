@@ -1,10 +1,12 @@
 import React from 'react';
+import DealershipDetails from './DealershipDetails.jsx'
 
 var OwnerDealerships = React.createClass({
   getInitialState: function(){
     return ({
         droid : [],
-        comp : 'deal_name'
+        asc : true,
+        chosenDealership: null
     });
   },
 
@@ -28,40 +30,26 @@ var OwnerDealerships = React.createClass({
     });
   },
 
-  sortDroid :function(a,b){
-    //ordenar por nome da dealership
-    if(this.state.comp=='deal_name'){
-      if(a.deal_name == b.deal_name){
+  sorter : function(array, property){
+    return array.sort(function(a,b){
+      if(a[property] == b[property]){
         return 0;
-      }else{
-        return (a.deal_name<b.deal_name)? -1 : 1;
-      }      
-    }/*else if(this.state.comp == 'owner'){
-      if(a.owner == b.owner){
-        return 0;
-      }else{
-        return (a.owner<b.owner)? -1 : 1;
-      } 
-    }else if(this.state.comp == 'location'){
-      if(a.location == b.location){
-        return 0;
-      }else{
-        return (a.location<b.location)? -1 : 1;
-      } 
-    }*/
-
+      }
+      return (a[property]<b[property])?-1:1;
+    })
   },
 
   handleClick: function(tipo, e) {
-    if(tipo == 'Dealership'){
-      {this.setState({comp:'deal_name'})};
-    }/*else if(tipo == 'Owner'){
-      {this.setState({comp:'owner'})};
-    }else if(tipo == 'Location'){
-      {this.setState({comp:'location'})};
-    }*/
-    var cenas = this.state.droid.sort(this.sortDroid);
-    {this.setState({droid : cenas})};
+    if(tipo == 'deal_name'){
+      var cenas = this.sorter(this.state.droid, tipo);
+      if(this.state.asc != true){
+        {this.setState({droid : cenas, asc : !this.state.asc})};
+      }else{
+        {this.setState({droid : cenas.reverse(), asc : !this.state.asc})};
+      }
+    }else{
+      {this.setState({chosenDealership : tipo})}
+    }
   },
 
   
@@ -74,16 +62,19 @@ var OwnerDealerships = React.createClass({
           <tbody>
             <tr>
               <td>
-                <h4 onClick={this.handleClick.bind(null,'Dealership')}>Dealership</h4>
+                <h4 onClick={this.handleClick.bind(null,'deal_name')}>My Dealerships</h4>
                 <ul>
                   {this.state.droid.map(function(deals) {
                     return (
-                        <li key={deals.id}>
-                          <a>{deals.deal_name}</a>
+                        <li onClick = {this.handleClick.bind(null,deals.id)} key={deals.id}>
+                          {deals.deal_name}
                         </li>
                     );
                   },this)}
                 </ul>
+              </td>
+              <td>
+                {this.state.chosenDealership != null ? <DealershipDetails dealID = {this.state.chosenDealership}/> : <h6>Choose a Dealership</h6>}
               </td>
             </tr>
           </tbody>

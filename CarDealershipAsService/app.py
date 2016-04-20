@@ -8,6 +8,7 @@ from api.createDealership import createDealership
 from api.showAllDealerships import showAllDealerships
 from api.showOwnerDealerships import showOwnerDealerships
 from api.allUsers import allUsers
+from api.dealershipDetails import dealershipDetails
 
 
 app = Flask(__name__,template_folder='template')
@@ -22,3 +23,4 @@ app.register_blueprint(createDealership)
 app.register_blueprint(showAllDealerships)
 app.register_blueprint(showOwnerDealerships)
 app.register_blueprint(allUsers)
+app.register_blueprint(dealershipDetails)
