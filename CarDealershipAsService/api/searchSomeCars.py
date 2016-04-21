@@ -96,6 +96,18 @@ def search_cars():
 	ret = ac.all()
 
 	for car in ret:
-		allCars.append({'id' : car.id, 'brand' : car.brand})
+		allCars.append({
+			'id' : car.id,
+			'dealershipID' : car.dealershipID,
+			'ownerID' : car.ownerID,
+			'brand' : car.brand,
+			'model' : car.model,
+			'color' : car.color,
+			'plate' : car.plate,
+			'mileage' : car.mileage,
+			'fuelType' : car.fuelType,
+			'price' : car.price,
+			'year' : car.year
+		})
 
 	return jsonify(fuelList = allFuels, brandsList = allBrands, locationsList = allLocations, carList = allCars, modelsList = allModels, feedback = message)

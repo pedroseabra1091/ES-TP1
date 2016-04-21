@@ -1,4 +1,5 @@
 import React from 'react';
+import CarDetails from './CarDetails.jsx';
 
 var SearchOptions = React.createClass({
 	getInitialState : function(){
@@ -134,59 +135,59 @@ var SearchOptions = React.createClass({
 
 		var filteredCars = this.state.carList.map(function(item){
 			return (
-				<p key={item.id}>
-					{item.brand}
-				</p>
+				<CarDetails carInfo={item} key={item.id}/>
 			);
 		});
 
 		return (
-			<div>
-				<aside className="menu menu-search">
-					<p className="menu-label">
-					Fuel Type
-					</p>
-					<select onChange={this.handleChange.bind(null,'fuelType')} value={this.state.chosenFuelType}>
-						{availableFuelTypes}
-					</select>
-					<p className="menu-label">
-						Brand
-					</p>
-					<select onChange={this.handleChange.bind(null,'brand')} value={this.state.chosenBrand}>
-						{availableBrands}
-					</select>
-					<p className="menu-label">
-						Model
-					</p>
-					<select onChange={this.handleChange.bind(null,'model')} value={this.state.chosenModel}>
-						{availableModels}
-					</select>
-					<p className="menu-label">
-						Price range
-					</p>
-					<p>
-						Lower Limit
-						<input className="input is-medium" type="number" min="0" placeholder={this.state.chosenPriceMin} onChange={this.handleChange.bind(null,'pricemin')}/>
-						Higher Limit
-						<input className="input is-medium" type="number" min="0" placeholder={this.state.chosenPriceMax} onChange={this.handleChange.bind(null,'pricemax')}/>
-					</p>
-					<p className="menu-label">
-						Mileage
-					</p>
-					<p>
-						Lower Km Limit 
-						<input className="input is-medium" type="number" min="0" placeholder={this.state.chosenKmMin} onChange={this.handleChange.bind(null,'kmmin')}/>
-						Higher Km Limit
-						<input className="input is-medium" type="number" min="0" placeholder={this.state.chosenKmMax} onChange={this.handleChange.bind(null,'kmmax')}/>
-					</p>
-					<p className="menu-label">
-						District
-					</p>
-					<select onChange={this.handleChange.bind(null,'location')} value={this.state.location}>
-						{availableLocations}
-					</select>
-				</aside>
-				<div>
+			<div className="columns">
+				<div className="column is-one-quarter">
+					<aside className="menu menu-search">
+						<p className="menu-label">
+						Fuel Type
+						</p>
+						<select onChange={this.handleChange.bind(null,'fuelType')} value={this.state.chosenFuelType}>
+							{availableFuelTypes}
+						</select>
+						<p className="menu-label">
+							Brand
+						</p>
+						<select onChange={this.handleChange.bind(null,'brand')} value={this.state.chosenBrand}>
+							{availableBrands}
+						</select>
+						<p className="menu-label">
+							Model
+						</p>
+						<select onChange={this.handleChange.bind(null,'model')} value={this.state.chosenModel}>
+							{availableModels}
+						</select>
+						<p className="menu-label">
+							Price range
+						</p>
+						<p>
+							Lower Limit
+							<input className="input is-medium" type="number" min="0" placeholder={this.state.chosenPriceMin} onChange={this.handleChange.bind(null,'pricemin')}/>
+							Higher Limit
+							<input className="input is-medium" type="number" min="0" placeholder={this.state.chosenPriceMax} onChange={this.handleChange.bind(null,'pricemax')}/>
+						</p>
+						<p className="menu-label">
+							Mileage
+						</p>
+						<p>
+							Lower Km Limit 
+							<input className="input is-medium" type="number" min="0" placeholder={this.state.chosenKmMin} onChange={this.handleChange.bind(null,'kmmin')}/>
+							Higher Km Limit
+							<input className="input is-medium" type="number" min="0" placeholder={this.state.chosenKmMax} onChange={this.handleChange.bind(null,'kmmax')}/>
+						</p>
+						<p className="menu-label">
+							District
+						</p>
+						<select onChange={this.handleChange.bind(null,'location')} value={this.state.location}>
+							{availableLocations}
+						</select>
+					</aside>
+				</div>
+				<div className="column">
 					<h3>Search Result</h3>
 					{filteredCars}
 				</div>
