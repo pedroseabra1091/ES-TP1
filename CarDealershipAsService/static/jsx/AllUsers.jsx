@@ -1,9 +1,12 @@
 import React from 'react';
+import Profile from './Profile.jsx';
+import ProfileX from './ProfileX.jsx';
 
 var AllUsers = React.createClass({
   getInitialState: function(){
     return ({
-        droid : []
+        droid : [],
+        chosenUser : null
     });
   },
 
@@ -23,20 +26,39 @@ var AllUsers = React.createClass({
     });
   },
 
+  handleClick : function(clickedID, e){
+    {this.setState({chosenUser : clickedID})};
+  },
+
   //tabela
   render: function() {
     return (
       <div>
-        <h1>All Users</h1>
-          <ul>
-            {this.state.droid.map(function(users) {
-              return (
-                  <li key={users.id}>
-                    {users.name} {users.email}
-                  </li>
-              );
-            },this)}
-          </ul>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <h1>All Users</h1>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ul>
+                  {this.state.droid.map(function(users) {
+                    return (
+                        <li onClick={this.handleClick.bind(null,users.id)} key={users.id}>
+                          {users.name} {users.email}
+                        </li>
+                    );
+                  },this)}
+                </ul>
+              </td>
+              <td>
+                {(this.state.chosenUser!=null)? <ProfileX userType='client' id = {this.state.chosenUser} /> : <h1>Choose a User</h1>}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     );
   }

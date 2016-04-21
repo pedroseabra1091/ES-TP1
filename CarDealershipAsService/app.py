@@ -11,6 +11,8 @@ from api.viewMyCars import viewMyCars
 from api.showAllDealerships import showAllDealerships
 from api.showOwnerDealerships import showOwnerDealerships
 from api.allUsers import allUsers
+from api.dealershipDetails import dealershipDetails
+from api.changeDealershipInfo import changeDealershipInfo
 
 app = Flask(__name__,template_folder='template')
 
@@ -27,3 +29,5 @@ app.register_blueprint(viewMyCars)
 app.register_blueprint(showAllDealerships)
 app.register_blueprint(showOwnerDealerships)
 app.register_blueprint(allUsers)
+app.register_blueprint(dealershipDetails)
+app.register_blueprint(changeDealershipInfo)

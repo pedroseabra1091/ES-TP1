@@ -16,7 +16,7 @@ def listOwnerDealerships():
 	myList = []
 
 
-	for deals in session.query(Dealership.id, Dealership.name,Dealership.location).filter(Dealership.ownerID==myOwnerID).all():
+	for deals in session.query(Dealership.id, Dealership.name,Dealership.location).filter(Dealership.ownerID==myOwnerID).order_by(Dealership.name).all():
 		#print deals
 		myList.append( {'id':deals[0] , 'deal_name': deals[1], 'location' : deals[2]})
 

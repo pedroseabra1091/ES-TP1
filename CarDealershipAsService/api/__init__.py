@@ -9,3 +9,5 @@ from .viewMyCars import viewMyCars
 from .showAllDealerships import showAllDealerships
 from .showOwnerDealerships import showOwnerDealerships
 from .allUsers import allUsers
+from .dealershipDetails import dealershipDetails
+from .changeDealershipInfo import changeDealershipInfo

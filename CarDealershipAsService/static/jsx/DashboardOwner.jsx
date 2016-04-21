@@ -76,7 +76,7 @@ var DashboardOwner = React.createClass({
 				</div>
 				{this.state.dealership ? <Dealership userType = {this.props.params.userType} id = {this.props.params.id} /> : null}
 				{this.state.search ? <Search /> : null}
-				{this.state.users ? <AllUsers /> : null}
+				{this.state.users ? <AllUsers userType={this.props.params.userType} id={this.props.params.id}/> : null}
 				{this.props.children}
 			</div> 
 		);

@@ -1,67 +1,67 @@
 import React from 'react';
+import DealershipDetails from './DealershipDetails.jsx'
+import ProfileXSettings from './ProfileXSettings.jsx'
 
 var OwnerDealerships = React.createClass({
   getInitialState: function(){
     return ({
         droid : [],
-        comp : 'deal_name'
+        asc : true,
+        chosenDealership: null,
+        settings:false
     });
   },
 
-  componentDidMount: function() {
+  fetchDroid : function(something = false){
     var someData = { id : this.props.id};
     console.log(someData);
-
     $.ajax({
       url: '/api/v1/showOwnerDealerships',
       dataType: 'json',
       contentType: 'application/json',
       type: 'POST',
       data: JSON.stringify(someData),
-      success: function(data) {
-        this.setState({droid: data.ret});
+     success: function(data) {
+        this.setState({droid: data.ret, settings:something});
         console.log("owner dealerships data received");
       }.bind(this),
       error: function() {
         console.error('nooooooo');
       }.bind(this)
-    });
+    });  
   },
 
-  sortDroid :function(a,b){
-    //ordenar por nome da dealership
-    if(this.state.comp=='deal_name'){
-      if(a.deal_name == b.deal_name){
-        return 0;
-      }else{
-        return (a.deal_name<b.deal_name)? -1 : 1;
-      }      
-    }/*else if(this.state.comp == 'owner'){
-      if(a.owner == b.owner){
-        return 0;
-      }else{
-        return (a.owner<b.owner)? -1 : 1;
-      } 
-    }else if(this.state.comp == 'location'){
-      if(a.location == b.location){
-        return 0;
-      }else{
-        return (a.location<b.location)? -1 : 1;
-      } 
-    }*/
+  componentDidMount: function() {
+    this.fetchDroid();
+  },
 
+  sorter : function(array, property){
+    return array.sort(function(a,b){
+      if(a[property] == b[property]){
+        return 0;
+      }
+      return (a[property]<b[property])?-1:1;
+    })
   },
 
   handleClick: function(tipo, e) {
-    if(tipo == 'Dealership'){
-      {this.setState({comp:'deal_name'})};
-    }/*else if(tipo == 'Owner'){
-      {this.setState({comp:'owner'})};
-    }else if(tipo == 'Location'){
-      {this.setState({comp:'location'})};
-    }*/
-    var cenas = this.state.droid.sort(this.sortDroid);
-    {this.setState({droid : cenas})};
+    if(tipo == 'deal_name'){
+      var cenas = this.sorter(this.state.droid, tipo);
+      if(this.state.asc != true){
+        {this.setState({droid : cenas, asc : !this.state.asc})};
+      }else{
+        {this.setState({droid : cenas.reverse(), asc : !this.state.asc})};
+      }
+    }else if(tipo =='settings'){
+      {this.setState({settings : !this.state.settings})};
+    }else if(tipo=='close_settings'){
+      var temp = !this.state.settings;
+      this.fetchDroid(temp);
+      //{this.setState({settings : !this.state.settings})};
+    }
+    else{
+      {this.setState({chosenDealership : tipo})}
+    }
   },
 
   
@@ -70,25 +70,46 @@ var OwnerDealerships = React.createClass({
   render: function() {
     return (
       <div>
-        <table id="DealershipTable">
-          <tbody>
-            <tr>
-              <td>
-                <h4 onClick={this.handleClick.bind(null,'Dealership')}>Dealership</h4>
-                <ul>
-                  {this.state.droid.map(function(deals) {
-                    return (
-                        <li key={deals.id}>
-                          <a>{deals.deal_name}</a>
-                        </li>
-                    );
-                  },this)}
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <div className="menu menu-dealership">
+                    <div className="menu-label" onClick={this.handleClick.bind(null,'deal_name')}>My Dealerships</div>
+                    <ul className="menu-list">
+                      {this.state.droid.map(function(deals) {
+                        return (
+                            <li className="card-header-title" onClick = {this.handleClick.bind(null,deals.id)} key={deals.id}>
+                              <a>{deals.deal_name}</a>
+                            </li>
+                        );
+                      },this)}
+                    </ul>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    {this.state.chosenDealership != null ? 
+                      (this.state.settings==false ?
+                        <div>
+                          <DealershipDetails dealID = {this.state.chosenDealership}/> 
+                          <button className = "button centerize" onClick={this.handleClick.bind(null,'settings')} className="button is-danger is-large buttonmargin">Settings</button>
+                        </div>
+                        : 
+                        <div>
+                          <ProfileXSettings id={this.state.chosenDealership} userType='owner'/>
+                          <button className = "button centerize" onClick={this.handleClick.bind(null,'close_settings')} className="button is-danger is-large buttonmargin">Close Settings</button>
+                        </div>
+                      )
+                    : <h6>Choose a Dealership</h6>}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>    
     );
   }
 
