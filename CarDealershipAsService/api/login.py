@@ -25,12 +25,11 @@ def user_login():
 			if client == None:
 				return jsonify({'message':'Email not found'})
 
-			elif client.password != requested_password:
+			elif client.verify_password(requested_password) == False:
 				return jsonify({'message':'Invalid password'})
 
-			else:
-				print client.id
-
+			elif client.verify_password(requested_password) == True:
+				
 				return jsonify({
 					'id' : client.id,
 					'userType' : 'client'
@@ -43,10 +42,10 @@ def user_login():
 			if owner == None:
 				return jsonify({'message':'Email not found'})
 
-			elif owner.password != requested_password:
+			elif owner.verify_password(requested_password) == False:
 				return jsonify({'message':'Invalid password'})
 			
-			else: 		
+			elif owner.verify_password(requested_password) == True:	
 				return jsonify({
 					'id' : owner.id,
 					'userType' : 'owner'

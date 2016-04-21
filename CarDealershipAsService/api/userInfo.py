@@ -1,4 +1,5 @@
 from flask import Blueprint,jsonify,request,render_template
+from flask_security import auth_token_required
 from db import engine
 from sqlalchemy.orm import sessionmaker
 from model import Client, Owner 
@@ -6,6 +7,7 @@ from model import Client, Owner
 userInfo = Blueprint('userInfo',__name__)
 
 @userInfo.route('/api/v1/userInfo',methods = ['POST']) 
+@auth_token_required
 def getInfo():
 
 	typeUser = request.json['user']

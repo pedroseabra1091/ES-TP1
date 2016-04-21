@@ -16,9 +16,9 @@ def create_user():
 
 	if(typeUser == "client"):
 
-		new_client = Client(name= request.json["name"],email=request.json["email"],password=request.json["password"],contact=request.json["contact"])
-
-		try:	
+		new_client = Client(name= request.json["name"],email=request.json["email"],contact=request.json["contact"])
+		new_client.hash_password(request.json["password"])
+		try:
 			session.add(new_client)
 			session.commit()
 		except IntegrityError:
@@ -28,8 +28,8 @@ def create_user():
 
 	elif(typeUser == "owner"):	
 
-		new_owner = Owner(name= request.json["name"],email=request.json["email"],password=request.json["password"],contact=request.json["contact"])
-
+		new_owner = Owner(name= request.json["name"],email=request.json["email"],contact=request.json["contact"])
+		new_owner.hash_password(request.json["password"])
 		try:	
 			session.add(new_owner)
 			session.commit()

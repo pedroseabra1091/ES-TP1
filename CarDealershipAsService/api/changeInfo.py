@@ -23,7 +23,7 @@ def change_Info():
 		client = session.query(Client).filter_by(id = userId).first()
 		client.name = name
 		client.email = email
-		client.password = password
+		client.hash_password(password)
 		client.contact = contact
 		session.commit()
 		return jsonify({
@@ -34,7 +34,7 @@ def change_Info():
 		owner = session.query(Owner).filter_by(id = userId).first()
 		owner.name = name
 		owner.email = email
-		owner.password = password
+		owner.hash_password(password)
 		owner.contact = contact
 		session.commit()
 		return jsonify({
