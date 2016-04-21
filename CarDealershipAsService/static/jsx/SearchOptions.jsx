@@ -6,8 +6,10 @@ var SearchOptions = React.createClass({
 			chosenFuelType : 'all',
 			chosenBrand : 'all',
 			chosenModel : 'all',
-			chosenPriceMin : 'all',
-			chosenPriceMax : 'all',
+			chosenPriceMin : 0,
+			chosenPriceMax : 0,
+			chosenKmMin : 0,
+			chosenKmMax : 0,
 			chosenLocation : 'all',
 			listFuelTypes : [],
 			listBrands : [],
@@ -18,6 +20,7 @@ var SearchOptions = React.createClass({
 	},
 
 	fetch :function(someData){
+		console.log("fetching");
 	  	$.ajax({
 	  		type:"POST",
 	  		url: "/api/v1/searchSomeCars",
@@ -25,13 +28,19 @@ var SearchOptions = React.createClass({
 	  		dataType: "json",
 	  		data: JSON.stringify(someData),
 	      success:function(result){
-	          {this.setState({
-	          	carList : result.carList,
-	          	listFuelTypes : result.fuelList,
-	          	listBrands : result.brandsList,
-	          	listModels : result.modelsList,
-	          	listLocations: result.locationsList
-	          })};
+			{this.setState({
+				chosenFuelType : someData.cft,
+				chosenBrand : someData.cb,
+				chosenModel : someData.cm,
+				chosenLocation : someData.cl,
+				chosenPriceMin : someData.cpmin,
+				chosenPriceMax : someData.cpmax,
+				carList : result.carList,
+				listFuelTypes : result.fuelList,
+				listBrands : result.brandsList,
+				listModels : result.modelsList,
+				listLocations: result.locationsList
+			})};
 	      }.bind(this),
 	      error:function(result){
 	      	console.log('Error connecting to the server');
@@ -40,13 +49,16 @@ var SearchOptions = React.createClass({
 	},
 
 	componentDidMount : function(){
+		console.log("did mount");
 		var someData = {
 			cft : this.state.chosenFuelType,
 			cb : this.state.chosenBrand,
 			cm : this.state.chosenModel,
 			cpmin : this.state.chosenPriceMin,
 			cpmax : this.state.chosenPriceMax,
-			cl : this.state.chosenLocation
+			cl : this.state.chosenLocation,
+			kmmin : this.state.chosenKmMin,
+			kmmax : this.state.chosenKmMax
 		}
 
 
@@ -54,50 +66,37 @@ var SearchOptions = React.createClass({
 	},
 
 	handleChange : function(type, event){
-		if(type == 'fuelType'){
-			{this.setState({chosenFuelType : event.target.value})};
-		}else if(type=='brand'){
-			{this.setState({chosenBrand : event.target.value})};
-			var someData = {
+		console.log("handling change");
+		var someData = {
 				cft : this.state.chosenFuelType,
 				cb : this.state.chosenBrand,
 				cm : this.state.chosenModel,
 				cpmin : this.state.chosenPriceMin,
 				cpmax : this.state.chosenPriceMax,
-				cl : this.state.chosenLocation
+				cl : this.state.chosenLocation,
+				kmmin : this.state.chosenKmMin,
+				kmmax : this.state.chosenKmMax
 			}
-
-
-			this.fetch(someData);
-
+		if(type == 'fuelType'){
+			someData.cft = event.target.value;
+		}else if(type=='brand'){
+			someData.cb = event.target.value;
+			someData.cm = 'all';
 		}else if(type=='model'){
-			{this.setState({chosenModel : event.target.value})};
+			someData.cm = event.target.value;
 		}else if(type=='location'){
-			{this.setState({chosenLocation : event.target.value})};
+			someData.cl = event.target.value;
 		}else if(type=='pricemin'){
-			{this.setState({chosenPriceMin : event.target.value})};
+			someData.cpmin = event.target.value;
 		}else if(type=='pricemax'){
-			{this.setState({chosenPriceMax : event.target.value})};
-		}
-
-		console.log(event.target.value);
-
-	},
-
-	handleSubmit : function(e){
-		e.preventDefault();
-
-		var someData = {
-			cft : this.state.chosenFuelType,
-			cb : this.state.chosenBrand,
-			cm : this.state.chosenModel,
-			cpmin : this.state.chosenPriceMin,
-			cpmax : this.state.chosenPriceMax,
-			cl : this.state.chosenLocation
+			someData.cpmax = event.target.value;
+		}else if(type=='kmmin'){
+			someData.kmmin = event.target.value;
+		}else if(type=='kmmax'){
+			someData.kmmax = event.target.value;
 		}
 
 		this.fetch(someData);
-		console.log('Did submit!');
 	},
 
 	render: function() {
@@ -141,52 +140,51 @@ var SearchOptions = React.createClass({
 			);
 		});
 
-
 		return (
 			<div>
 				<aside className="menu menu-search">
-					<form onSubmit={this.handleSubmit}>
-						<p className="menu-label">
-						Fuel Type
-						</p>
-						<select onChange={this.handleChange.bind(null,'fuelType')} value={this.state.chosenFuelType}>
-							{availableFuelTypes}
-						</select>
-						<p className="menu-label">
-							Brand
-						</p>
-						<select onChange={this.handleChange.bind(null,'brand')} value={this.state.chosenBrand}>
-							{availableBrands}
-						</select>
-						{this.state.chosenBrand == 'all' ?
-							null
-							:
-							<div>
-								<p className="menu-label">
-									Model
-								</p>
-								<select onChange={this.handleChange.bind(null,'model')} value={this.state.chosenModel}>
-									{availableModels}
-								</select>
-							</div>
-						}
-						<p className="menu-label">
-							Price range
-						</p>
-						<p>
-							Lower Limit
-							<input className="input is-medium" type="text" value={this.state.chosenPriceMin} onChange={this.handleChange.bind(null,'pricemin')}/>
-							Higher Limit
-							<input className="input is-medium" type="text" value={this.state.chosenPriceMax} onChange={this.handleChange.bind(null,'pricemax')}/>
-						</p>
-						<p className="menu-label">
-							District
-						</p>
-						<select onChange={this.handleChange.bind(null,'location')} value={this.state.location}>
-							{availableLocations}
-						</select>
-						<button type="submit" >Search</button>
-					</form>
+					<p className="menu-label">
+					Fuel Type
+					</p>
+					<select onChange={this.handleChange.bind(null,'fuelType')} value={this.state.chosenFuelType}>
+						{availableFuelTypes}
+					</select>
+					<p className="menu-label">
+						Brand
+					</p>
+					<select onChange={this.handleChange.bind(null,'brand')} value={this.state.chosenBrand}>
+						{availableBrands}
+					</select>
+					<p className="menu-label">
+						Model
+					</p>
+					<select onChange={this.handleChange.bind(null,'model')} value={this.state.chosenModel}>
+						{availableModels}
+					</select>
+					<p className="menu-label">
+						Price range
+					</p>
+					<p>
+						Lower Limit
+						<input className="input is-medium" type="number" min="0" placeholder={this.state.chosenPriceMin} onChange={this.handleChange.bind(null,'pricemin')}/>
+						Higher Limit
+						<input className="input is-medium" type="number" min="0" placeholder={this.state.chosenPriceMax} onChange={this.handleChange.bind(null,'pricemax')}/>
+					</p>
+					<p className="menu-label">
+						Mileage
+					</p>
+					<p>
+						Lower Km Limit 
+						<input className="input is-medium" type="number" min="0" placeholder={this.state.chosenKmMin} onChange={this.handleChange.bind(null,'kmmin')}/>
+						Higher Km Limit
+						<input className="input is-medium" type="number" min="0" placeholder={this.state.chosenKmMax} onChange={this.handleChange.bind(null,'kmmax')}/>
+					</p>
+					<p className="menu-label">
+						District
+					</p>
+					<select onChange={this.handleChange.bind(null,'location')} value={this.state.location}>
+						{availableLocations}
+					</select>
 				</aside>
 				<div>
 					<h3>Search Result</h3>
