@@ -72,10 +72,10 @@ var DashboardOwner = React.createClass({
 					  </ul>
 					</div>
 					 {this.state.profile ? <Profile userType = {this.props.params.userType} id = {this.props.params.id} /> : null}
-					 {this.state.logout ? <Search /> : null}
+					 {this.state.logout ? <Search userType = {this.props.params.userType} id = {this.props.params.id} /> : null}
 				</div>
 				{this.state.dealership ? <Dealership userType = {this.props.params.userType} id = {this.props.params.id} /> : null}
-				{this.state.search ? <Search /> : null}
+				{this.state.search ? <Search userType = {this.props.params.userType} id = {this.props.params.id} /> : null}
 				{this.state.users ? <AllUsers userType={this.props.params.userType} id={this.props.params.id}/> : null}
 				{this.props.children}
 			</div> 
