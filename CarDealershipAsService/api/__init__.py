@@ -6,4 +6,5 @@ from .createDealership import createDealership
 from .showAllDealerships import showAllDealerships
 from .showOwnerDealerships import showOwnerDealerships
 from .allUsers import allUsers
-from dealershipDetails import dealershipDetails
+from .dealershipDetails import dealershipDetails
+from .changeDealershipInfo import changeDealershipInfo

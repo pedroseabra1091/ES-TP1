@@ -1,33 +1,38 @@
 import React from 'react';
 import DealershipDetails from './DealershipDetails.jsx'
+import ProfileXSettings from './ProfileXSettings.jsx'
 
 var OwnerDealerships = React.createClass({
   getInitialState: function(){
     return ({
         droid : [],
         asc : true,
-        chosenDealership: null
+        chosenDealership: null,
+        settings:false
     });
   },
 
-  componentDidMount: function() {
+  fetchDroid : function(something = false){
     var someData = { id : this.props.id};
     console.log(someData);
-
     $.ajax({
       url: '/api/v1/showOwnerDealerships',
       dataType: 'json',
       contentType: 'application/json',
       type: 'POST',
       data: JSON.stringify(someData),
-      success: function(data) {
-        this.setState({droid: data.ret});
+     success: function(data) {
+        this.setState({droid: data.ret, settings:something});
         console.log("owner dealerships data received");
       }.bind(this),
       error: function() {
         console.error('nooooooo');
       }.bind(this)
-    });
+    });  
+  },
+
+  componentDidMount: function() {
+    this.fetchDroid();
   },
 
   sorter : function(array, property){
@@ -47,7 +52,14 @@ var OwnerDealerships = React.createClass({
       }else{
         {this.setState({droid : cenas.reverse(), asc : !this.state.asc})};
       }
-    }else{
+    }else if(tipo =='settings'){
+      {this.setState({settings : !this.state.settings})};
+    }else if(tipo=='close_settings'){
+      var temp = !this.state.settings;
+      this.fetchDroid(temp);
+      //{this.setState({settings : !this.state.settings})};
+    }
+    else{
       {this.setState({chosenDealership : tipo})}
     }
   },
@@ -61,12 +73,12 @@ var OwnerDealerships = React.createClass({
         <table id="DealershipTable">
           <tbody>
             <tr>
-              <td>
-                <h4 onClick={this.handleClick.bind(null,'deal_name')}>My Dealerships</h4>
+              <td className="card is-fullwidth">
+                <div className="card-header" onClick={this.handleClick.bind(null,'deal_name')}>My Dealerships</div>
                 <ul>
                   {this.state.droid.map(function(deals) {
                     return (
-                        <li onClick = {this.handleClick.bind(null,deals.id)} key={deals.id}>
+                        <li className="card-header-title" onClick = {this.handleClick.bind(null,deals.id)} key={deals.id}>
                           {deals.deal_name}
                         </li>
                     );
@@ -74,7 +86,19 @@ var OwnerDealerships = React.createClass({
                 </ul>
               </td>
               <td>
-                {this.state.chosenDealership != null ? <DealershipDetails dealID = {this.state.chosenDealership}/> : <h6>Choose a Dealership</h6>}
+                {this.state.chosenDealership != null ? 
+                  (this.state.settings==false ?
+                    <div>
+                      <DealershipDetails dealID = {this.state.chosenDealership}/> 
+                      <button className = "button centerize" onClick={this.handleClick.bind(null,'settings')} className="button is-danger is-large buttonmargin">Settings</button>
+                    </div>
+                    : 
+                    <div>
+                      <ProfileXSettings id={this.state.chosenDealership} userType='owner'/>
+                      <button className = "button centerize" onClick={this.handleClick.bind(null,'close_settings')} className="button is-danger is-large buttonmargin">Close Settings</button>
+                    </div>
+                  )
+                  : <h6>Choose a Dealership</h6>}
               </td>
             </tr>
           </tbody>
