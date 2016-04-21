@@ -70,40 +70,46 @@ var OwnerDealerships = React.createClass({
   render: function() {
     return (
       <div>
-        <table id="DealershipTable">
-          <tbody>
-            <tr>
-              <td className="card is-fullwidth">
-                <div className="card-header" onClick={this.handleClick.bind(null,'deal_name')}>My Dealerships</div>
-                <ul>
-                  {this.state.droid.map(function(deals) {
-                    return (
-                        <li className="card-header-title" onClick = {this.handleClick.bind(null,deals.id)} key={deals.id}>
-                          {deals.deal_name}
-                        </li>
-                    );
-                  },this)}
-                </ul>
-              </td>
-              <td>
-                {this.state.chosenDealership != null ? 
-                  (this.state.settings==false ?
-                    <div>
-                      <DealershipDetails dealID = {this.state.chosenDealership}/> 
-                      <button className = "button centerize" onClick={this.handleClick.bind(null,'settings')} className="button is-danger is-large buttonmargin">Settings</button>
-                    </div>
-                    : 
-                    <div>
-                      <ProfileXSettings id={this.state.chosenDealership} userType='owner'/>
-                      <button className = "button centerize" onClick={this.handleClick.bind(null,'close_settings')} className="button is-danger is-large buttonmargin">Close Settings</button>
-                    </div>
-                  )
-                  : <h6>Choose a Dealership</h6>}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <div className="menu menu-dealership">
+                    <div className="menu-label" onClick={this.handleClick.bind(null,'deal_name')}>My Dealerships</div>
+                    <ul className="menu-list">
+                      {this.state.droid.map(function(deals) {
+                        return (
+                            <li className="card-header-title" onClick = {this.handleClick.bind(null,deals.id)} key={deals.id}>
+                              <a>{deals.deal_name}</a>
+                            </li>
+                        );
+                      },this)}
+                    </ul>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    {this.state.chosenDealership != null ? 
+                      (this.state.settings==false ?
+                        <div>
+                          <DealershipDetails dealID = {this.state.chosenDealership}/> 
+                          <button className = "button centerize" onClick={this.handleClick.bind(null,'settings')} className="button is-danger is-large buttonmargin">Settings</button>
+                        </div>
+                        : 
+                        <div>
+                          <ProfileXSettings id={this.state.chosenDealership} userType='owner'/>
+                          <button className = "button centerize" onClick={this.handleClick.bind(null,'close_settings')} className="button is-danger is-large buttonmargin">Close Settings</button>
+                        </div>
+                      )
+                    : <h6>Choose a Dealership</h6>}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>    
     );
   }
 
