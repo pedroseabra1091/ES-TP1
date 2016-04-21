@@ -44,6 +44,7 @@ var CarForm = React.createClass({
   },
 
   handleChange: function(type,evt) {
+    console.log('cenas');
     if(type == 'Dealership'){
       this.setState({
         dealership:evt.target.value
@@ -89,7 +90,29 @@ var CarForm = React.createClass({
         price: evt.target.value
       })
     }
+    this.checkEmptyInputs();
   },
+
+  checkEmptyInputs:function(){
+      console.log('input checking');
+      $('form > input').keyup(function() {
+
+        var empty = false;
+        $('form > input').each(function() {
+            if ($(this).val() == '') {
+                empty = true;
+            }
+        });
+        if (empty) {
+            console.log('!!!');
+            $('#addCarButton').attr('disabled', 'disabled');
+        } else {
+            console.log('alright');
+            $('#addCarButton').removeAttr('disabled');        
+        }
+    });
+  },
+
 
   handleSubmit:function(evt){
   	
@@ -150,10 +173,10 @@ var CarForm = React.createClass({
               <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'Plate')}/>
               <br></br>
               <span className=" userParams">Mileage</span>
-              <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'Mileage')}/>
+              <input className="input customInput" type="number" onChange = {this.handleChange.bind(null,'Mileage')}/>
               <br></br>
               <span className=" userParams">Year</span>
-              <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'Year')}/>
+              <input className="input customInput" type="number" min="0" onChange = {this.handleChange.bind(null,'Year')}/>
               <br></br>
               <span className=" userParams">Fuel Type</span>
               <select className="input customInput" onChange = {this.handleChange.bind(null,'FuelType')}>
@@ -164,9 +187,9 @@ var CarForm = React.createClass({
               </select>
               <br></br>
               <span className=" userParams">Price</span>
-              <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'Price')}/>
+              <input className="input customInput" type="number" onChange = {this.handleChange.bind(null,'Price')}/>
               <div className="centerize paddtop">
-                <button type="submit" style={styles} className="button is-warning is-large">Add Car</button>
+                <button type="submit" id ="addCarButton" style={styles} className="button is-warning is-large" disabled="disabled">Add Car</button>
               </div>  
   	    	</form>
       </div>

@@ -1,4 +1,3 @@
-
 from db import Base
 from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired)
 from passlib.apps import custom_app_context as pwd_context
@@ -42,3 +41,5 @@ class Owner(Base):
 
     def verify_password(self, password):
         return pwd_context.verify(password, self.password)
+
+

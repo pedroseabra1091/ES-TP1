@@ -17,6 +17,7 @@ var MyCars = React.createClass({
         success:function(result){	
         	 console.log(result.data)
 	    	 $.each(result.data, function(index,car) {
+	    	 	this.
 	           	$('#card-container').append(
 	           		'<div class="card">' +
 					  '<div class="card-image">' +
@@ -35,7 +36,7 @@ var MyCars = React.createClass({
 					        '<p class="subtitle is-4">' + car.fuelType + '</p>' +
 					        '<p class="inlinelocked carInfo">Mileage</p>' + 
 					        '<p class="subtitle is-4">' + car.mileage + ' km' + '</p>' +  
-					      '</div>' +
+					       '</div>' +
 					    '</div>' +
 				 	 '</div>' +
 				  '</div>')
