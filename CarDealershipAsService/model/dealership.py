@@ -13,4 +13,4 @@ class Dealership(Base):
     name = Column(String(100),nullable=False)
     contact = Column(Integer,nullable=False)
     location = Column(String(100), nullable=False)
-    cars = relationship('Car',backref='dealership', lazy='dynamic')
+    cars = relationship('Car',backref='dealership', lazy='dynamic', cascade="all, delete-orphan")

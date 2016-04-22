@@ -33,8 +33,8 @@ class Owner(Base):
     email = Column(String(100), nullable=False, unique=True)
     password = Column(String(120), nullable=False)
     contact = Column(Integer, nullable=False)
-    dealers = relationship('Dealership', backref='owner', lazy='dynamic')
-    all_cars = relationship('Car',backref='owner',lazy='dynamic')
+    dealers = relationship('Dealership', backref='owner', lazy='dynamic', cascade="all, delete-orphan")
+    all_cars = relationship('Car',backref='owner',lazy='dynamic', cascade="all, delete-orphan")
 
     def hash_password(self, password):
         self.password = pwd_context.encrypt(password)

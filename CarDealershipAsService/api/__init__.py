@@ -13,3 +13,4 @@ from .dealershipDetails import dealershipDetails
 from .changeDealershipInfo import changeDealershipInfo
 from .searchSomeCars import searchSomeCars
 from .updateCarState import updateCarState
+from .deleteCar import deleteCar
