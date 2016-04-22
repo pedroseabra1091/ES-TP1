@@ -20,13 +20,13 @@ var Dealership = React.createClass({
 	},
 
 	handleClick: function(type,e){
+		console.log("handling...type: " + type);
 		if(type == 'Create'){
 			this.setState({create : true}),
 	        this.setState({myDealership : false}),
 	        this.setState({otherDealerships : false}),
 	        this.setState({viewCars: false}), 
 	        this.setState({addCar: false})
-
 		}
 		else if(type == 'MyDealership'){ 
 			this.setState({create : false}),
@@ -43,6 +43,7 @@ var Dealership = React.createClass({
 	        this.setState({addCar: false})
 		}
 		else if(type == 'ViewCars'){
+			console.log('entrei view cars');
 			this.setState({create : false}),
 	        this.setState({myDealership : false}),
 	        this.setState({otherDealerships : false}),
@@ -61,9 +62,10 @@ var Dealership = React.createClass({
 	},
 
 	render: function() {
+		console.log("rendering....");
 		return (
 			<div className="columns">
-			  <div className="column is-one-quarter">
+			  <div className="column is-3">
 			    <aside className="menu menu-dealership">
 				  <p className="menu-label">
 				    Dealership actions
@@ -77,12 +79,14 @@ var Dealership = React.createClass({
 				  </ul>
 				</aside>
 			  </div>
+			  <div className = "column">
 		  		{this.state.create ? <DealershipForm id = {this.props.id}  /> : null}
 			 	{this.state.myDealership ? <OwnerDealerships id={this.props.id} /> : null}
 				{this.state.otherDealerships ? <SomeDealerships /> : null}
 				{this.state.viewCars ? <MyCars id = {this.props.id} /> : null}
 				{this.state.addCar ? <CarForm  id = {this.props.id} /> : null}
 				{this.props.children}
+			  </div>
 			</div>
 		);
 	}

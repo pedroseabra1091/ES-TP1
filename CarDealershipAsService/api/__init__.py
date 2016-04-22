@@ -12,3 +12,4 @@ from .allUsers import allUsers
 from .dealershipDetails import dealershipDetails
 from .changeDealershipInfo import changeDealershipInfo
 from .searchSomeCars import searchSomeCars
+from .updateCarState import updateCarState

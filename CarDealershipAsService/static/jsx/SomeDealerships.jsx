@@ -24,7 +24,6 @@ var SomeDealerships = React.createClass({
         console.log("dealerships data received");
       }.bind(this),
       error: function() {
-        console.error('nooooooo');
       }.bind(this)
     });
   },

@@ -49,7 +49,7 @@ var Profile = React.createClass({
 	render: function() {
 		var styles = {
 			color: "black"
-		}
+		};
 
 		return (
 			<div className = "container">
