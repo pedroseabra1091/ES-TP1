@@ -16,6 +16,7 @@ from api.changeDealershipInfo import changeDealershipInfo
 from api.searchSomeCars import searchSomeCars
 from api.updateCarState import updateCarState
 
+
 app = Flask(__name__,template_folder='template')
 
 

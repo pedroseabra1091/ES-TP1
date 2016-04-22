@@ -10,7 +10,7 @@ var CarDetails = React.createClass({
 	      <div id = "unmount" onClick = {this.props.clickHandler} className="card">
 			  <div className="card-image">
 			    <figure className="image is-4by3">
-			      <img className="car-img" src="../../static/assets/car-example.jpg" />
+			      <img className="car-img" src="https://s3-eu-west-1.amazonaws.com/carimagesbucket/car-example.jpg" />
 			    </figure>
 			  </div>
 			  <div className="card-content">

@@ -6,6 +6,7 @@ var CarForm = React.createClass({
         return {
            dealership:"",
            brand:"",
+           image:"",
            model:"",
            color:"",
            plate:"",
@@ -55,6 +56,11 @@ var CarForm = React.createClass({
    			brand: evt.target.value
    		})
    	}
+    else if(type == 'Image'){
+      this.setState({
+        image: evt.target.value
+      })
+    }
     else if(type == 'Model'){
     	this.setState({
     		model: evt.target.value
@@ -120,6 +126,7 @@ var CarForm = React.createClass({
       id: this.props.id,
       dealership: this.state.dealership,
   	  brand:this.state.brand,
+      image:this.state.image,
       model:this.state.model,
       color:this.state.color,
       plate:this.state.plate,
@@ -159,6 +166,9 @@ var CarForm = React.createClass({
               <select id="dealerships" className="input customInput" onChange = {this.handleChange.bind(null,'Dealership')}>
               <option></option>
               </select>
+              <br></br>
+              <span className=" userParams">Car image</span>
+              <input type = "file" name = "Userfile" onChange={this.handleChange.bind(null,'Image')} />
               <br></br>
               <span className=" userParams">Brand</span>
               <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'Brand')}/>
