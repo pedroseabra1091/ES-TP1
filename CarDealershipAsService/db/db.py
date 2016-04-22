@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 
-databaseurl = 'mysql://root:ameiro13@localhost/autotrader'
+databaseurl = 'mysql://root:Pergula2010@localhost/autotrader'
 
 engine = create_engine(databaseurl)
 

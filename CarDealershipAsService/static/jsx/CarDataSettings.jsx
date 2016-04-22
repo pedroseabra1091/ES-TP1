@@ -4,21 +4,21 @@ var CarDataSettings = React.createClass({
 
 	getInitialState() {
 	    return {
-	       'dealership' : "",
-	       'brand' : "",
-	       'model' : "",
-	       'color' : "",
-	       'fuelType' : "",
-	       'plate' : "",
-	       'mileage':"",
-	       'price' : "",
-	       'year' : ""
+	       'chosenDealership' : this.props.car.dealershipID,
+	       'brand' : this.props.car.brand,
+	       'model' : this.props.car.model,
+	       'color' : this.props.car.color,
+	       'fuelType' : this.props.car.fuelType,
+	       'plate' : this.props.car.fuelType,
+	       'mileage':this.props.car.mileage,
+	       'price' : this.props.car.price,
+	       'year' : this.props.car.year
 	    };
 	},
 
 	handleChange:function(type,evt){
 		if(type == 'Dealership')
-			this.setState({dealership: evt.target.value});
+			this.setState({chosenDealership: evt.target.value});
 		else if (type == 'brand')
 			this.setState({brand : evt.target.value});
 		else if (type == 'model')
@@ -38,10 +38,12 @@ var CarDataSettings = React.createClass({
 	},
 
 	handleSubmit:function(evt){
+		evt.preventDefault();
+
 		var data = {
-			'id':this.props.id,
-			'carID':this.props.car.id,
-			'dealership' : this.state.dealership,
+			'id': this.props.id,
+			'carID': this.props.car.id,
+			'chosenDealership' : this.state.chosenDealership,
 			'brand' : this.state.brand,
 			'model' : this.state.model,
 			'color' : this.state.color,
@@ -51,7 +53,7 @@ var CarDataSettings = React.createClass({
 			'price' : this.state.price,
 			'year' : this.state.year
 		}
-		evt.preventDefault();
+
 		 $.ajax({
 	        type:"POST",
 	        url: "/api/v1/updateCarState",
@@ -77,7 +79,7 @@ var CarDataSettings = React.createClass({
               <div className = "notification is-error"><button className="delete"></button></div>
               <div className="column is-half margin-nopadd">
         		 	<form className = "form-dealership" onSubmit = {this.handleSubmit} >
-        		 	 	<select className="input customInput" onChange = {this.handleChange.bind(null,'Dealership')}>
+        		 	 	<select value = {this.props.car.dealershipID} className="input customInput" onChange = {this.handleChange.bind(null,'Dealership')}>
         		 		{this.props.dealerships.map(function(item){
         		 			return (
 			              		<option key={item.id}>{item.name}</option> 
@@ -113,6 +115,7 @@ var CarDataSettings = React.createClass({
       						<button type="submit" style={styles} className="button is-warning is-large">Save</button>
                  	 	</div>  
     		    	</form>
+    		    	<button onClick={this.props.clickHandler} style={styles} className="button is-warning is-large">Done</button>
               	</div>
               </div>
 			

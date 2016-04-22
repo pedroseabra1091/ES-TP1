@@ -1,0 +1,11 @@
+branch-defaults:
+  default:
+    environment: null
+    group_suffix: null
+global:
+  application_name: CarDealershipServ
+  default_ec2_keyname: learnKeyPair
+  default_platform: Python 2.7
+  default_region: eu-west-1
+  profile: null
+  sc: null

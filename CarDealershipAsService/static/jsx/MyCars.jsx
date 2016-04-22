@@ -72,7 +72,7 @@ var MyCars = React.createClass({
   },
   activateCarSettings:function(carObject,evt){
   	this.setState({
-  		activateCarSettings : !activateCarSettings  
+  		activateCarSettings : !this.state.activateCarSettings  
   	})
   },
 
@@ -119,9 +119,9 @@ var MyCars = React.createClass({
 					: 
 					<div>
 						{this.state.activateCarSettings ? 
-							<CarDetailedData clickHandler = {this.activateCarSettings}  car = {this.state.car} />
+							<CarDetailedData clickHandler={this.activateCarSettings} car={this.state.car} />
 							:
-							<CarDataSettings id={this.props.id} car={this.state.car} dealerships={this.state.dealershipList}  />
+							<CarDataSettings clickHandler={this.activateCarSettings} id={this.props.id} car={this.state.car} dealerships={this.state.dealershipList}  />
 						}
 					</div>
 				}
