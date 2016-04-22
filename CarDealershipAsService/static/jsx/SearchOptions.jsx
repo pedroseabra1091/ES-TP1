@@ -188,7 +188,6 @@ var SearchOptions = React.createClass({
 					</aside>
 				</div>
 				<div className="column">
-					<h3>Search Result</h3>
 					{filteredCars}
 				</div>
 			</div>

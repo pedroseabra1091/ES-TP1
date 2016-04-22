@@ -39,7 +39,7 @@ var DealershipDetails = React.createClass({
 
 	render : function(){
 		return(
-			<div>
+			<div className = "details">
 				<h4>Dealership Details</h4>
 				<br/>
 				<h6>Dealership ID : {this.props.dealID}</h6>

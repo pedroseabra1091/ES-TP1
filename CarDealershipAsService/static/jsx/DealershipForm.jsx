@@ -64,7 +64,7 @@ var DealershipForm = React.createClass({
     return(
             <div>
               <div className = "notification is-error"><button className="delete"></button></div>
-              <div className="absoluted margin-paddtop">
+              <div className="column is-half is-offset-1 absoluted margin-paddtop customedColumn">
   				      <form className ="form-dealership" onSubmit = {this.handleSubmit} >
     					     <p className=" userParams">Dealership Name</p>
   				  	     <input className="input is-medium customInput" type="text" onChange = {this.handleChange.bind(null,'name')}/>

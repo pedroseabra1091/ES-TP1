@@ -11,6 +11,7 @@ button{
 }
 p,li,a{
 	font-family: "Josefin Sans";
+	font-size: 21px;
 }
 label{
 	font-family: MoonLight;
@@ -174,6 +175,7 @@ p{
 .menu-search{
 	font-size: 19px;
 	margin-left: 4px;
+	min-width: 217px;
 }
 .left-search-menu{
 	text-align: right;
@@ -225,4 +227,12 @@ p{
 
 .work-area{
 	background-color: #ffffff;
+}
+
+.customedColumn{
+	margin-left:0.33333%;
+}
+.details{
+	position:relative;
+	right:380px;
 }

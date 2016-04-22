@@ -159,7 +159,7 @@ var CarForm = React.createClass({
     };
 
     return(
-        <div className="column is-half absoluted margin-paddtop">
+        <div className="column is-half  absoluted margin-paddtop">
           <div className = "notification is-error"><button className="delete"></button></div>
   				<form className ="form-dealership" onSubmit = {this.handleSubmit} >
     					 <span className=" userParams">Dealership</span>

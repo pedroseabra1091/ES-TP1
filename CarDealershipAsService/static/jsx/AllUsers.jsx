@@ -34,7 +34,7 @@ var AllUsers = React.createClass({
   render: function() {
     return (
       <div>
-        <table>
+        <table className="paddtop">
           <tbody>
             <tr>
               <td>
