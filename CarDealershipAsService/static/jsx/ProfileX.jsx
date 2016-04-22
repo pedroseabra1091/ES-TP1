@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link,browserHistory } from 'react-router';
 import Settings from './Settings.jsx';
 
 
@@ -23,9 +23,6 @@ var ProfileX = React.createClass({
 	  		dataType: "json",
 	  		data: JSON.stringify(someData),
 	        success:function(result){
-	        	/*$("p.userName").html(result.name).show();
-	        	$("p.email").html(result.email).show();
-	        	$("p.contact").html(result.contact).show();*/
 	        	console.log('[ProfileX] : profile data received successfully. Name: '+result.name);
 	        	{this.setState({
 	        		profileName : result.name,
@@ -49,7 +46,6 @@ var ProfileX = React.createClass({
 	},
 
 	componentWillReceiveProps: function(nextProps){
-		console.log('[ProfileX] : receiving props');
 		var data = {
 	 		id : nextProps.id,
 	 		user : nextProps.userType
@@ -66,6 +62,27 @@ var ProfileX = React.createClass({
 		}
 		else
 			console.log('Unknown click');
+	},
+
+	deleteOwnerHandler : function(){
+		var someData = {
+			'id' : this.props.id
+		};
+		console.log(someData);
+
+		$.ajax({
+			url: '/api/v1/deleteOwner',
+			dataType: 'json',
+			contentType: 'application/json',
+			type: 'POST',
+			data: JSON.stringify(someData),
+			success: function(data) {
+				browserHistory.push('/');	
+			}.bind(this),
+			error: function() {
+				console.error('nooooooo');
+			}.bind(this)
+		});
 	},
 
 	render: function() {
@@ -92,7 +109,7 @@ var ProfileX = React.createClass({
 					</div>
 				</div>
 				<div className = "centerize">
-					{this.props.children}
+					<button className="button is-info is-normal buttonmargin"  onClick={this.deleteOwnerHandler}>Delete Owner</button>
 				</div>
 			</div>
 		);

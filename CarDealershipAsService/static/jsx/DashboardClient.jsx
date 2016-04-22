@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link,browserHistory } from 'react-router';
 import Profile from './Profile.jsx';
 import Search from './Search.jsx';
 
@@ -26,9 +27,7 @@ var DashboardClient = React.createClass({
 
 		}
 		else if(type == 'Logout'){
-			this.setState({'logout' : true})
-			this.setState({'profile' : false})
-			this.setState({'search' : false})
+			browserHistory.push('/');
 		}
 		else
 			console.log('Unknown click');
@@ -45,8 +44,13 @@ var DashboardClient = React.createClass({
 						    <li onClick = {this.handleClick.bind(null,'Logout')}><a><h2 className = "title menu">Logout</h2></a></li>
 						</ul>
 					</div>
-				 	{this.state.profile ? <Profile userType = {this.props.params.userType} id = {this.props.params.id} /> : null}
-				 	{this.state.logout ? <Search /> : null}
+				 	{this.state.profile ? 
+				 		<div>
+				 			<Profile userType = {this.props.params.userType} id = {this.props.params.id} /> 
+				 		</div>
+				 		: 
+				 		null
+				 	}
 				</div> 
 			{this.state.search ? <Search /> : null}
 			{this.props.children}

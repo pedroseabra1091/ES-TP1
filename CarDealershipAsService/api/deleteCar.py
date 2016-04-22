@@ -15,7 +15,6 @@ def delete_Car():
 
 	Car.query.filter(id=int(carID)).delete()
 	
-	session.delete(toDelete)
 	session.commit()
 
 	return jsonify({'message' : 'Car deleted'})
