@@ -24,6 +24,8 @@ var CarDetails = React.createClass({
 			        <p className="subtitle is-4"> {this.props.carInfo.fuelType} </p>
 			        <p className="inlinelocked carInfo">Mileage</p>
 			        <p className="subtitle is-4"> {this.props.carInfo.mileage} km</p>
+			        <p className="inlinelocked carInfo">Price</p>
+			        <p className="subtitle is-4"> {this.props.carInfo.price} €</p>
 			      </div>
 			    </div>
 		 	  </div>

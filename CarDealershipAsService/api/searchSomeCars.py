@@ -77,13 +77,8 @@ def search_cars():
 		ac = ac.filter(Car.model == filterModel)
 	if filterLocation != 'all':
 		ac = ac.filter(Dealership.location == filterLocation)
-	if filterMaxPrice > 0:
-		if filterMaxPrice >= filterMinPrice:
-			ac = ac.filter(Car.price < filterMaxPrice)
-			ac = ac.filter(Car.price > filterMinPrice)
-		else:
-			message = "Max Price has to be higher than Min Price"
-	ac = ac.filter(Car.price > filterMinPrice)
+	ac = ac.filter(Car.price <= filterMaxPrice)
+	ac = ac.filter(Car.price >= filterMinPrice)
 	if filterMaxKm > 0:
 		if filterMaxKm >= filterMinKm:
 			ac = ac.filter(Car.mileage <= filterMaxKm)
