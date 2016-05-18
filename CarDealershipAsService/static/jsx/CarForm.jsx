@@ -167,9 +167,6 @@ var CarForm = React.createClass({
               <option></option>
               </select>
               <br></br>
-              <span className=" userParams">Car image</span>
-              <input type = "file" name = "Userfile" onChange={this.handleChange.bind(null,'Image')} />
-              <br></br>
               <span className=" userParams">Brand</span>
               <input className="input customInput" type="text" onChange = {this.handleChange.bind(null,'Brand')}/>
               <br></br>
