@@ -46,6 +46,27 @@ var Profile = React.createClass({
 			console.log('Unknown click');
 	},
 
+	deleteUserHandler : function(){
+		var someData = {
+			'id' : this.props.id
+		};
+		console.log(someData);
+
+		$.ajax({
+			url: '/api/v1/deleteOwner',
+			dataType: 'json',
+			contentType: 'application/json',
+			type: 'POST',
+			data: JSON.stringify(someData),
+			success: function(data) {
+				browserHistory.push('/');	
+			}.bind(this),
+			error: function() {
+				console.error('nooooooo');
+			}.bind(this)
+		});
+	},
+
 	render: function() {
 		var styles = {
 			color: "black"
@@ -71,6 +92,7 @@ var Profile = React.createClass({
 				</div>
 				<div className = "centerize">
 					<button className = "button" onClick={this.handleClick.bind(null,'Settings')} style={styles} className="button is-danger is-large buttonmargin">Settings</button>
+					<button className = "button" onClick={this.deleteUserHandler} style={styles} className="button is-danger is-large buttonmargin">Delete Owner</button>
 					{this.state.settings ? <Settings userType = {this.props.userType} id = {this.props.id} /> : null}
 					{this.props.children}
 				</div>
