@@ -11,7 +11,6 @@ class Car(Base):
     dealershipID = Column(Integer,ForeignKey('dealership.id'))
     ownerID = Column(Integer, ForeignKey('owner.id'))
     brand = Column(String(100), nullable = False)
-    carImage = Column(String(120))
     model = Column(String(100), nullable = False)
     color = Column(String(100), nullable=False)
     plate = Column(String(100), nullable = False,unique=True)

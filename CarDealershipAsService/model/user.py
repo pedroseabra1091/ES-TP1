@@ -41,5 +41,3 @@ class Owner(Base):
 
     def verify_password(self, password):
         return pwd_context.verify(password, self.password)
-
-

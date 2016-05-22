@@ -22,7 +22,7 @@ def search_cars():
 	filterMaxKm = request.json['kmmax']
 
 
-	allFuels = [{'name':'all'}]
+	allFuels = [{'name':'all', 'key':'0'}]
 	allBrands = [{'name':'all'}]
 	allModels = [{'name': 'all'}]
 	allLocations = [{'name' : 'all'}]
@@ -33,28 +33,36 @@ def search_cars():
 
 	af = session.query(distinct(Car.fuelType)).all()
 	print ('All Fuel Types: ')
+	i=0
 	for something in af:
-		allFuels.append({'name':something})
+		i+=1
+		allFuels.append({'name':str(something[0]), 'key':str(i)});
 
 	print allFuels
 
 	ab = session.query(distinct(Car.brand)).all()
 	print ('AllBrands: ')
+	i=0
 	for something in ab:
-		allBrands.append({'name':something})
+		i+=1
+		allBrands.append({'name':str(something[0]), 'key':str(i)})
 	print allBrands
 
 	print (' All models')
+	i=0
 	if filterBrand != 'all':
 		am = session.query(distinct(Car.model)).filter(Car.brand==filterBrand).all()
 		for something in am:
-			allModels.append({'name':something})
+			i+=1
+			allModels.append({'name':str(something[0]), 'key':str(i)})
 	print allModels
 
 	al = session.query(distinct(Dealership.location)).filter(Car.dealershipID==Dealership.id).all()
 	print ('All car locations(dealership locations that have cars): ')
+	i=0
 	for something in al:
-		allLocations.append({'name':something})
+		i+=1
+		allLocations.append({'name':str(something[0]), 'key':str(i)})
 	
 	print allLocations
 
@@ -77,7 +85,8 @@ def search_cars():
 		ac = ac.filter(Car.model == filterModel)
 	if filterLocation != 'all':
 		ac = ac.filter(Dealership.location == filterLocation)
-	ac = ac.filter(Car.price <= filterMaxPrice)
+	if filterMaxPrice > 0:
+		ac = ac.filter(Car.price <= filterMaxPrice)
 	ac = ac.filter(Car.price >= filterMinPrice)
 	if filterMaxKm > 0:
 		if filterMaxKm >= filterMinKm:

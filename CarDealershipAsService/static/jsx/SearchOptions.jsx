@@ -90,11 +90,20 @@ var SearchOptions = React.createClass({
 		}else if(type=='pricemin'){
 			someData.cpmin = event.target.value;
 		}else if(type=='pricemax'){
-			someData.cpmax = event.target.value;
+			console.log(event.target.value);
+			if(event.target.value == ''){
+				someData.cpmax = 0;
+			}else{
+				someData.cpmax = event.target.value;
+			}
 		}else if(type=='kmmin'){
 			someData.kmmin = event.target.value;
 		}else if(type=='kmmax'){
-			someData.kmmax = event.target.value;
+			if(event.target.value == ''){
+				someData.kmmax = 0;
+			}else{
+				someData.kmmax = event.target.value;
+			}
 		}
 
 		this.fetch(someData);
@@ -102,8 +111,9 @@ var SearchOptions = React.createClass({
 
 	render: function() {
 		var availableFuelTypes = this.state.listFuelTypes.map(function(item){
+			console.log(item.name);
 			return (
-				<option value={item.name} key={item.name}>
+				<option value={item.name} key={item.key}>
 					{item.name}
 				</option>
 			);

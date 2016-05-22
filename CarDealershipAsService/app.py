@@ -16,6 +16,7 @@ from api.changeDealershipInfo import changeDealershipInfo
 from api.searchSomeCars import searchSomeCars
 from api.updateCarState import updateCarState
 from api.deleteCar import deleteCar
+from api.deleteOwner import deleteOwner
 
 
 app = Flask(__name__,template_folder='template')
@@ -38,3 +39,4 @@ app.register_blueprint(changeDealershipInfo)
 app.register_blueprint(searchSomeCars)
 app.register_blueprint(updateCarState)
 app.register_blueprint(deleteCar)
+app.register_blueprint(deleteOwner)
